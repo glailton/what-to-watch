@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/homeFragment"
+            android:checked="true"
+            android:icon="@drawable/ic_baseline_home"
+            android:title="@string/home_title_label" />
+        <item
+            android:id="@+id/seriesFragment"
+            android:icon="@drawable/ic_baseline_star"
+            android:title="@string/series_title_label" />
+        <item
+            android:id="@+id/watchFragment"
+            android:icon="@drawable/ic_baseline_live_tv"
+            android:title="@string/watch_title_label" />
+    </group>
+</menu>
