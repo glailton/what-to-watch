@@ -16,9 +16,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?colorAccent"
             app:title="teste"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:theme="@style/Toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +42,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/activity_main_bottom_series"
-            android:background="?colorAccent">
+            style="@style/BottomNavigation"
+            android:fitsSystemWindows="true"
+            app:itemIconTint="@drawable/tab_color"
+            app:itemTextColor="@drawable/tab_color"
+            app:labelVisibilityMode="labeled">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
