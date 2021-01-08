@@ -1,4 +1,4 @@
-package grsoft.com.br.whattowatch.data.response
+package grsoft.com.br.whattowatch.data
 
 import grsoft.com.br.whattowatch.data.model.Series
 

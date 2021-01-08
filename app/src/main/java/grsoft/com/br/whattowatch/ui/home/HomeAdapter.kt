@@ -9,7 +9,7 @@ import grsoft.com.br.whattowatch.databinding.SeriesItemBinding
 import grsoft.com.br.whattowatch.ui.home.HomeAdapter.HomeViewHolder
 
 class HomeAdapter(
-    private val seriesList: List<Series>,
+    private val seriesList: MutableList<Series>,
     private val onItemClickListener: ((series: Series) -> Unit)): RecyclerView.Adapter<HomeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
@@ -28,11 +28,14 @@ class HomeAdapter(
     class HomeViewHolder(private val binding: SeriesItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         private val imageViewPoster = binding.imagePoster
+        private var title = binding.tvTitle
 
         fun bindView(series: Series, listener: (series: Series) -> Unit) {
             Picasso.get()
                 .load(series.thumbnailPath)
                 .into(imageViewPoster)
+            title.text = series.name
+
             binding.root.setOnClickListener {
                 listener(series)
             }

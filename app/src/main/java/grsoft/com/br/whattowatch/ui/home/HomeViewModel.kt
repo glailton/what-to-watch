@@ -1,40 +1,43 @@
 package grsoft.com.br.whattowatch.ui.home
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import grsoft.com.br.whattowatch.R
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.*
 import grsoft.com.br.whattowatch.data.model.Series
-import grsoft.com.br.whattowatch.data.repository.SeriesRepository
-import grsoft.com.br.whattowatch.data.response.SeriesResult
-import java.lang.IllegalArgumentException
+import grsoft.com.br.whattowatch.data.repository.TVShowRepository
+import grsoft.com.br.whattowatch.data.response.series.SeriesBodyResponse
+import grsoft.com.br.whattowatch.utils.Resource
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
-class HomeViewModel(private val dataSource: SeriesRepository) : ViewModel() {
-    val seriesLiveData: MutableLiveData<List<Series>> = MutableLiveData()
-    val viewFlipperData: MutableLiveData<Pair<Int, Int?>> = MutableLiveData()
+class HomeViewModel @ViewModelInject constructor(
+    private val repository: TVShowRepository
+) : ViewModel() {
+    private var _series = MutableLiveData<Resource<MutableList<Series>>>()
+    val series: LiveData<Resource<MutableList<Series>>> get() = _series
 
-    fun getSeries() {
-        dataSource.getSeries { result: SeriesResult ->
-            when(result) {
-                is SeriesResult.Success -> {
-                    seriesLiveData.value = result.series
-                    viewFlipperData.value = Pair(VIEW_FLIPPER_SERIES, null)
+    init {
+        _series.postValue(Resource.loading(null))
+
+        fetchSeries("1")
+    }
+
+    private fun fetchSeries(page: String) {
+        viewModelScope.launch {
+            try {
+                val seriesList: MutableList<Series> = mutableListOf()
+                repository.getSeries(page).tvShows.forEach { s ->
+                    val seriesModel = Series(s.id, s.name, s.permalink, s.startDate, s.endDate,
+                        s.country, s.network, s.status, s.imageThumbnailPath)
+                    seriesList.add(seriesModel)
                 }
-                is SeriesResult.ApiError -> {
-                    if (result.code == 401) {
-                        viewFlipperData.value = Pair(VIEW_FLIPPER_ERROR, R.string.series_error_401)
-                    } else {
-                        viewFlipperData.value = Pair(VIEW_FLIPPER_ERROR, R.string.series_error_400_generic)
-                    }
-                }
-                is SeriesResult.ServerError -> {
-                    viewFlipperData.value = Pair(VIEW_FLIPPER_ERROR, R.string.series_error_500_generic)
-                }
+                _series.value = Resource.success(seriesList)
+            } catch (e: Exception) {
+                _series.value = Resource.error(e.message.toString(), null)
             }
         }
     }
 
-    class ViewModelFactory(private val dataSource: SeriesRepository) : ViewModelProvider.Factory {
+    class ViewModelFactory(private val dataSource: TVShowRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
                 return HomeViewModel(dataSource) as T
@@ -43,8 +46,4 @@ class HomeViewModel(private val dataSource: SeriesRepository) : ViewModel() {
         }
     }
 
-    companion object {
-        private const val VIEW_FLIPPER_SERIES = 1
-        private const val VIEW_FLIPPER_ERROR = 2
-    }
 }

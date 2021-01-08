@@ -1,4 +1,4 @@
-package grsoft.com.br.whattowatch
+package grsoft.com.br.whattowatch.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,8 +10,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import dagger.hilt.android.AndroidEntryPoint
+import grsoft.com.br.whattowatch.R
 import grsoft.com.br.whattowatch.databinding.ActivityMainBinding
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
@@ -46,7 +49,11 @@ class MainActivity : AppCompatActivity() {
         drawerToggle.syncState()
 
         navController = findNavController(R.id.nav_host_fragment)
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment, R.id.seriesFragment, R.id.watchFragment))
+        appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.homeFragment,
+            R.id.seriesFragment,
+            R.id.watchFragment
+        ))
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNav.setupWithNavController(navController)

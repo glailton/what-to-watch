@@ -1,21 +1,24 @@
 package grsoft.com.br.whattowatch.ui.home
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import grsoft.com.br.whattowatch.R
-import grsoft.com.br.whattowatch.data.repository.SeriesApiDataSource
+import dagger.hilt.android.AndroidEntryPoint
+import grsoft.com.br.whattowatch.data.model.Series
 import grsoft.com.br.whattowatch.databinding.HomeFragmentBinding
+import grsoft.com.br.whattowatch.utils.Resource
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -26,31 +29,27 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val homeViewModel: HomeViewModel = HomeViewModel.ViewModelFactory(SeriesApiDataSource())
-            .create(HomeViewModel::class.java)
-
-        homeViewModel.seriesLiveData.observe(viewLifecycleOwner, Observer {
-            it?.let { seriesList ->
-                with(binding.recyclerHome) {
-                    layoutManager = GridLayoutManager(context, 2)
-//                    setHasFixedSize(true)
-                    adapter = HomeAdapter(seriesList) { series ->
-                        Toast.makeText(context, series.name, Toast.LENGTH_LONG).show()
+        homeViewModel.series.observe(viewLifecycleOwner, Observer {
+            when (it.status) {
+                Resource.Status.SUCCESS -> {
+                    binding.progressBar.visibility = View.GONE
+                    with(binding.recyclerHome) {
+                        layoutManager = GridLayoutManager(context,3)
+                        setHasFixedSize(true)
+                        if (!it.data.isNullOrEmpty()) {
+                            adapter = HomeAdapter(it.data) { series ->
+                                Toast.makeText(context, series.name, Toast.LENGTH_LONG).show()
+                            }
+                        }
                     }
                 }
+                Resource.Status.ERROR ->
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+
+                Resource.Status.LOADING ->
+                    binding.progressBar.visibility = View.VISIBLE
             }
         })
-
-        homeViewModel.viewFlipperData.observe(viewLifecycleOwner, Observer {
-            it?.let { viewFlipper ->
-                binding.viewFlipperBooks.displayedChild = viewFlipper.first
-                viewFlipper.second?.let { errorMessage ->
-                    binding.textViewError.text = getString(errorMessage)
-                }
-            }
-        })
-
-        homeViewModel.getSeries()
     }
 
     override fun onDestroy() {
