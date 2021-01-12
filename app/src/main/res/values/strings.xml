@@ -22,4 +22,7 @@
     <!-- To Watch Fragment -->
     <string name="watch_title_label">To watch</string>
 
+    <!-- Most Popular Fragment -->
+    <string name="most_popular_title_label">To watch</string>
+
 </resources>

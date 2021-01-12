@@ -15,7 +15,7 @@ interface TVShowsService {
                         @Query("page") page: String): Response<SeriesBodyResponse>
 
     @GET("most-popular")
-    suspend fun getMostPopularSeries(@Query("page") page: String): Response<SeriesBodyResponse>
+    suspend fun getMostPopularSeries(@Query("page") page: String): SeriesBodyResponse
 
     @GET("show-details")
     suspend fun getShowDetails(@Query("q") name: String): Response<SeriesDetailsBodyResponse>

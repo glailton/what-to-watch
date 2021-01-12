@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import grsoft.com.br.whattowatch.data.remote.TVShowRemoteDataSourceImpl
+import grsoft.com.br.whattowatch.data.remote.TVShowRemoteDataSource
 import grsoft.com.br.whattowatch.data.remote.TVShowsService
 import grsoft.com.br.whattowatch.data.repository.TVShowRepository
 import retrofit2.Retrofit
@@ -32,7 +32,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRepository(remoteDataSource: TVShowRemoteDataSourceImpl) =
+    fun provideRepository(remoteDataSource: TVShowRemoteDataSource) =
         TVShowRepository(remoteDataSource)
 
 }
