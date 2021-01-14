@@ -1,44 +1,62 @@
 package grsoft.com.br.whattowatch.ui.home
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import grsoft.com.br.whattowatch.data.model.Series
+import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.databinding.SeriesItemBinding
 import grsoft.com.br.whattowatch.ui.home.HomeAdapter.HomeViewHolder
 
 class HomeAdapter(
-    private val seriesList: MutableList<Series>,
-    private val onItemClickListener: ((series: Series) -> Unit)): RecyclerView.Adapter<HomeViewHolder>() {
+    private val listener: TVShowItemListener): RecyclerView.Adapter<HomeViewHolder>() {
+
+    interface TVShowItemListener {
+        fun onClicked(tvShow: TVShow)
+    }
+
+    private val tvShows: MutableList<TVShow> = mutableListOf()
+
+    fun setItems(tvShows: ArrayList<TVShow>) {
+        this.tvShows.clear()
+        this.tvShows.addAll(tvShows)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val binding = SeriesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HomeViewHolder(binding)
+        return HomeViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        val series = seriesList[position]
+        val tvShow = tvShows[position]
 
-        holder.bindView(series, onItemClickListener)
+        holder.bindView(tvShow)
     }
 
-    override fun getItemCount() = seriesList.size
+    override fun getItemCount() = tvShows.size
 
-    class HomeViewHolder(private val binding: SeriesItemBinding): RecyclerView.ViewHolder(binding.root) {
+    class HomeViewHolder(
+        binding: SeriesItemBinding,
+        private val listener: TVShowItemListener): RecyclerView.ViewHolder(binding.root),
+        View.OnClickListener{
 
+        private lateinit var tvShow: TVShow
         private val imageViewPoster = binding.imagePoster
         private var title = binding.tvTitle
+        private val BASE_URL: String = "https://image.tmdb.org/t/p/w185"
 
-        fun bindView(series: Series, listener: (series: Series) -> Unit) {
+        fun bindView(tvShow: TVShow) {
+            this.tvShow = tvShow
             Picasso.get()
-                .load(series.thumbnailPath)
+                .load(BASE_URL + tvShow.posterPath)
                 .into(imageViewPoster)
-            title.text = series.name
+            title.text = tvShow.name
+        }
 
-            binding.root.setOnClickListener {
-                listener(series)
-            }
+        override fun onClick(view: View?) {
+            listener.onClicked(tvShow)
         }
 
     }

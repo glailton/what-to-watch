@@ -1,12 +1,11 @@
 package grsoft.com.br.whattowatch.data.remote
 
-import grsoft.com.br.whattowatch.data.response.series.SeriesBodyResponse
 import javax.inject.Inject
 
 class TVShowRemoteDataSource @Inject constructor(
-    private val tvShowsService: TVShowsService
-) {
+    private val tvShowService: TVShowService
+): BaseDataSource() {
 
-    suspend fun getSeries(page: String): SeriesBodyResponse = tvShowsService.getSeries(page)
-    suspend fun getMostPopularSeries(page: String): SeriesBodyResponse = tvShowsService.getMostPopularSeries(page)
+    suspend fun getSeries(page: String) = getResult { tvShowService.getSeries(page) }
+//    suspend fun getMostPopularSeries(page: String): SeriesBodyResponse = tvShowsService.getMostPopularSeries(page)
 }

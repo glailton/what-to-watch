@@ -9,16 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import grsoft.com.br.whattowatch.data.model.Series
+import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.databinding.HomeFragmentBinding
 import grsoft.com.br.whattowatch.utils.Resource
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeAdapter.TVShowItemListener {
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by viewModels()
+    private lateinit var adapter: HomeAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -29,19 +31,22 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeViewModel.series.observe(viewLifecycleOwner, Observer {
+        setupRecyclerView()
+        setupObservers()
+    }
+
+    private fun setupRecyclerView() {
+        adapter = HomeAdapter(this)
+        binding.recyclerHome.layoutManager = GridLayoutManager(context,3)
+        binding.recyclerHome.adapter = adapter
+    }
+
+    private fun setupObservers() {
+        homeViewModel.tvShows.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     binding.progressBar.visibility = View.GONE
-                    with(binding.recyclerHome) {
-                        layoutManager = GridLayoutManager(context,3)
-                        setHasFixedSize(true)
-                        if (!it.data.isNullOrEmpty()) {
-                            adapter = HomeAdapter(it.data) { series ->
-                                Toast.makeText(context, series.name, Toast.LENGTH_LONG).show()
-                            }
-                        }
-                    }
+                    if (!it.data.isNullOrEmpty()) adapter.setItems(ArrayList(it.data))
                 }
                 Resource.Status.ERROR ->
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
@@ -52,9 +57,15 @@ class HomeFragment : Fragment() {
         })
     }
 
+    override fun onClicked(tvShow: TVShow) {
+        Toast.makeText(requireContext(), tvShow.name, Toast.LENGTH_LONG).show()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
+
+
 
 }
