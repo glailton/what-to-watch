@@ -5,10 +5,11 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import grsoft.com.br.whattowatch.data.entities.Genre
 import grsoft.com.br.whattowatch.data.entities.TVShow
 
 @Dao
-interface TVShowDao {
+interface TMDbDao {
     @Query("SELECT * FROM tv_shows")
     fun getAllSeries() : LiveData<List<TVShow>>
 
@@ -16,8 +17,20 @@ interface TVShowDao {
     fun getSeriesById(id: Int): LiveData<TVShow>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(TVShows: List<TVShow>)
+    suspend fun insertAll(tvShows: List<TVShow>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(TVShow: TVShow)
+    suspend fun insert(tvShow: TVShow)
+
+    @Query("SELECT * FROM genres")
+    fun getAllGenres() : LiveData<List<Genre>>
+
+    @Query("SELECT * FROM genres WHERE id = :id")
+    fun getGenreById(id: Int): LiveData<Genre>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllGenres(genres: List<Genre>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertGenre(genre: Genre)
 }

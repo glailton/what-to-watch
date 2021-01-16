@@ -1,50 +1,40 @@
 package grsoft.com.br.whattowatch.ui.home
 
+import android.view.View
+import android.widget.Toast
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import grsoft.com.br.whattowatch.data.entities.Genre
 import grsoft.com.br.whattowatch.data.entities.TVShow
-import grsoft.com.br.whattowatch.data.repository.TVShowRepository
+import grsoft.com.br.whattowatch.data.models.FeedItem
+import grsoft.com.br.whattowatch.data.repository.TMDbRepository
 import grsoft.com.br.whattowatch.utils.Resource
 import kotlinx.coroutines.launch
-import java.lang.Exception
+import timber.log.Timber
 
 class HomeViewModel @ViewModelInject constructor(
-    private val repository: TVShowRepository
+    private val repository: TMDbRepository
 ) : ViewModel() {
-    private var _series = MutableLiveData<Resource<MutableList<TVShow>>>()
-    val TVShow: LiveData<Resource<MutableList<TVShow>>> get() = _series
-
-    init {
-        _series.postValue(Resource.loading(null))
-
-//        fetchSeries("1")
-    }
 
     val tvShows = repository.getSeries("1")
+    val genres = repository.getGenres("en")
 
-//    private fun fetchSeries(page: String) {
-//        viewModelScope.launch {
-//            try {
-//                val TVShowList: MutableList<TVShow> = mutableListOf()
-//                repository.getSeries(page).tvShows.forEach { s ->
-//                    val seriesModel = TVShow(s.id, s.name, s.permalink, s.startDate, s.endDate,
-//                        s.country, s.network, s.status, s.imageThumbnailPath)
-//                    TVShowList.add(seriesModel)
-//                }
-//                _series.value = Resource.success(TVShowList)
-//            } catch (e: Exception) {
-//                _series.value = Resource.error(e.message.toString(), null)
-//            }
-//        }
-//    }
+    fun convertToFeed(tvShows: List<TVShow>, genres: Map<Int, String>): List<FeedItem> {
 
-    class ViewModelFactory(private val dataSource: TVShowRepository) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-                return HomeViewModel(dataSource) as T
-            }
-            throw IllegalArgumentException("Unknown viewModel class")
+        val feedItems = mutableListOf<FeedItem>()
+
+        for ((index, genre) in genres) {
+            val genreTvShows = tvShows
+                    .filter { it.genreIds.contains(index) }
+                    .sortedByDescending { it.voteAverage }
+            feedItems.add(
+                    FeedItem(
+                            index.toLong(),
+                            genre,
+                            genreTvShows
+                    )
+            )
         }
+        return feedItems
     }
-
 }

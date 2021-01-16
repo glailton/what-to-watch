@@ -8,19 +8,22 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import grsoft.com.br.whattowatch.data.entities.TVShow
+import grsoft.com.br.whattowatch.data.models.FeedItem
 import grsoft.com.br.whattowatch.databinding.HomeFragmentBinding
+import grsoft.com.br.whattowatch.ui.Feed.FeedAdapter
+import grsoft.com.br.whattowatch.ui.adapters.SeriesAdapter
 import grsoft.com.br.whattowatch.utils.Resource
+import timber.log.Timber
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), HomeAdapter.TVShowItemListener {
+class HomeFragment : Fragment(), SeriesAdapter.TVShowItemListener {
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by viewModels()
-    private lateinit var adapter: HomeAdapter
+    private lateinit var adapter: FeedAdapter
+    private var mapGenre: Map<Int, String> = hashMapOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -36,8 +39,7 @@ class HomeFragment : Fragment(), HomeAdapter.TVShowItemListener {
     }
 
     private fun setupRecyclerView() {
-        adapter = HomeAdapter(this)
-        binding.recyclerHome.layoutManager = GridLayoutManager(context,3)
+        adapter = FeedAdapter(this)
         binding.recyclerHome.adapter = adapter
     }
 
@@ -46,10 +48,29 @@ class HomeFragment : Fragment(), HomeAdapter.TVShowItemListener {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     binding.progressBar.visibility = View.GONE
-                    if (!it.data.isNullOrEmpty()) adapter.setItems(ArrayList(it.data))
+                    if (!it.data.isNullOrEmpty())
+                        adapter.setItems(ArrayList(homeViewModel.convertToFeed(ArrayList(it.data), mapGenre)))
+//                        adapter.setItems(ArrayList(it.data))
                 }
                 Resource.Status.ERROR ->
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+
+                Resource.Status.LOADING ->
+                    binding.progressBar.visibility = View.VISIBLE
+            }
+        })
+
+        homeViewModel.genres.observe(viewLifecycleOwner, Observer { resource ->
+            when (resource.status) {
+                Resource.Status.SUCCESS -> {
+                    if (!resource.data.isNullOrEmpty())  {
+                        val genres = resource.data
+                        mapGenre = genres.associateBy({it.id}, {it.name})
+                        Timber.d(mapGenre.toString())
+                    }
+                }
+                Resource.Status.ERROR ->
+                    Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
 
                 Resource.Status.LOADING ->
                     binding.progressBar.visibility = View.VISIBLE
@@ -65,7 +86,4 @@ class HomeFragment : Fragment(), HomeAdapter.TVShowItemListener {
         super.onDestroy()
         _binding = null
     }
-
-
-
 }

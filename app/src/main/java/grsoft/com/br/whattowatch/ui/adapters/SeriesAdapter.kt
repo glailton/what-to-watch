@@ -1,4 +1,4 @@
-package grsoft.com.br.whattowatch.ui.home
+package grsoft.com.br.whattowatch.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.databinding.SeriesItemBinding
-import grsoft.com.br.whattowatch.ui.home.HomeAdapter.HomeViewHolder
+import grsoft.com.br.whattowatch.ui.adapters.SeriesAdapter.HomeViewHolder
 
-class HomeAdapter(
+class SeriesAdapter(
     private val listener: TVShowItemListener): RecyclerView.Adapter<HomeViewHolder>() {
 
     interface TVShowItemListener {

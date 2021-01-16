@@ -85,6 +85,10 @@ dependencies {
     kapt 'com.google.dagger:hilt-android-compiler:2.28.1-alpha'
     kapt "androidx.hilt:hilt-compiler:1.0.0-alpha01"
 
+    //Calligraphy
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'io.github.inflationx:viewpump:2.0.3'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'

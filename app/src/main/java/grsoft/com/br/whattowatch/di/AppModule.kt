@@ -9,10 +9,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import grsoft.com.br.whattowatch.data.local.AppDatabase
-import grsoft.com.br.whattowatch.data.local.TVShowDao
-import grsoft.com.br.whattowatch.data.remote.TVShowRemoteDataSource
-import grsoft.com.br.whattowatch.data.remote.TVShowService
-import grsoft.com.br.whattowatch.data.repository.TVShowRepository
+import grsoft.com.br.whattowatch.data.local.TMDbDao
+import grsoft.com.br.whattowatch.data.remote.TMDbRemoteDataSource
+import grsoft.com.br.whattowatch.data.remote.TMDbService
+import grsoft.com.br.whattowatch.data.repository.TMDbRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -32,11 +32,11 @@ object AppModule {
     fun provideGson(): Gson = GsonBuilder().create()
 
     @Provides
-    fun provideTvShowService(retrofit: Retrofit): TVShowService = retrofit.create(TVShowService::class.java)
+    fun provideTvShowService(retrofit: Retrofit): TMDbService = retrofit.create(TMDbService::class.java)
 
     @Singleton
     @Provides
-    fun provideTVShowRemoteDataSource(tvShowService: TVShowService) = TVShowRemoteDataSource(tvShowService)
+    fun provideTVShowRemoteDataSource(tmdbService: TMDbService) = TMDbRemoteDataSource(tmdbService)
 
     @Singleton
     @Provides
@@ -48,8 +48,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRepository(remoteDataSource: TVShowRemoteDataSource,
-                          localDataSource: TVShowDao) =
-        TVShowRepository(remoteDataSource, localDataSource)
+    fun provideRepository(remoteDataSource: TMDbRemoteDataSource,
+                          localDataSource: TMDbDao) =
+        TMDbRepository(remoteDataSource, localDataSource)
 
 }
