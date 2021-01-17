@@ -1,4 +1,4 @@
-package grsoft.com.br.whattowatch.ui.popular
+package grsoft.com.br.whattowatch.ui.rated
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,22 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import grsoft.com.br.whattowatch.R
 
-class MostPopularFragment : Fragment() {
+class TopRatedFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MostPopularFragment()
+        fun newInstance() = TopRatedFragment()
     }
 
-    private lateinit var viewModel: MostPopularViewModel
+    private lateinit var viewModel: TopRatedViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.most_popular_fragment, container, false)
+        return inflater.inflate(R.layout.top_rated_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MostPopularViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(TopRatedViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

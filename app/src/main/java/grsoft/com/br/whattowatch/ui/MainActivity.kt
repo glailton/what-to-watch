@@ -50,9 +50,11 @@ class MainActivity : AppCompatActivity() {
 
         navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.homeFragment,
-            R.id.seriesFragment,
-            R.id.watchFragment
+            R.id.popularFragment,
+            R.id.showsFragment,
+            R.id.watchFragment,
+            R.id.topRatedFragment,
+            R.id.onTheAirFragment
         ))
 
         setupActionBarWithNavController(navController, appBarConfiguration)

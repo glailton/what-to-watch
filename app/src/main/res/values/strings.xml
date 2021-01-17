@@ -13,16 +13,19 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
-    <!-- Home Fragment -->
-    <string name="home_title_label">Home</string>
+    <!-- Popular Fragment -->
+    <string name="popular_title_label">Popular</string>
 
     <!-- Series Fragment -->
-    <string name="series_title_label">Series</string>
+    <string name="shows_title_label">My Shows</string>
 
     <!-- To Watch Fragment -->
-    <string name="watch_title_label">To watch</string>
+    <string name="watch_title_label">What to watch</string>
 
-    <!-- Most Popular Fragment -->
-    <string name="most_popular_title_label">To watch</string>
+    <!-- Top Rated Fragment -->
+    <string name="top_rated_title_label">Top Rated</string>
+
+    <!-- On The Air Fragment -->
+    <string name="on_the_air_title_label">On The Air</string>
 
 </resources>

@@ -3,21 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_series"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/popularFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="grsoft.com.br.whattowatch.ui.home.HomeFragment"
-        android:label="@string/home_title_label"
-        tools:layout="@layout/home_fragment" />
+        android:id="@+id/popularFragment"
+        android:name="grsoft.com.br.whattowatch.ui.popular.PopularFragment"
+        android:label="@string/popular_title_label"
+        tools:layout="@layout/popular_fragment" />
     <fragment
-        android:id="@+id/seriesFragment"
-        android:name="grsoft.com.br.whattowatch.ui.series.SeriesFragment"
-        android:label="@string/series_title_label"
-        tools:layout="@layout/fragment_series" />
+        android:id="@+id/showsFragment"
+        android:name="grsoft.com.br.whattowatch.ui.shows.ShowsFragment"
+        android:label="@string/shows_title_label"
+        tools:layout="@layout/shows_fragment" />
     <fragment
         android:id="@+id/watchFragment"
         android:name="grsoft.com.br.whattowatch.ui.watch.WatchFragment"
         android:label="@string/watch_title_label"
-        tools:layout="@layout/fragment_watch" />
+        tools:layout="@layout/watch_fragment" />
+    <fragment
+        android:id="@+id/topRatedFragment"
+        android:name="grsoft.com.br.whattowatch.ui.rated.TopRatedFragment"
+        android:label="@string/top_rated_title_label"
+        tools:layout="@layout/top_rated_fragment" />
+    <fragment
+        android:id="@+id/onTheAirFragment"
+        android:name="grsoft.com.br.whattowatch.ui.ontheair.OnTheAirFragment"
+        android:label="@string/on_the_air_title_label"
+        tools:layout="@layout/on_the_air_fragment" />
 </navigation>

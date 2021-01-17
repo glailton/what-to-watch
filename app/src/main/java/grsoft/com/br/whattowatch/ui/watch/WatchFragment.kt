@@ -7,19 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import dagger.hilt.android.AndroidEntryPoint
 import grsoft.com.br.whattowatch.R
-import grsoft.com.br.whattowatch.databinding.FragmentWatchBinding
+import grsoft.com.br.whattowatch.databinding.WatchFragmentBinding
 
 @AndroidEntryPoint
 class WatchFragment : Fragment() {
 
-    private var _binding: FragmentWatchBinding? = null
+    private var _binding: WatchFragmentBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentWatchBinding.inflate(layoutInflater, container, false)
+        _binding = WatchFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 

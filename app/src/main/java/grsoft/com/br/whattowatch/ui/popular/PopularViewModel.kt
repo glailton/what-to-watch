@@ -1,20 +1,17 @@
-package grsoft.com.br.whattowatch.ui.home
+package grsoft.com.br.whattowatch.ui.popular
 
-import android.view.View
-import android.widget.Toast
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import grsoft.com.br.whattowatch.data.entities.Genre
 import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.data.models.FeedItem
 import grsoft.com.br.whattowatch.data.repository.TMDbRepository
-import grsoft.com.br.whattowatch.utils.Resource
-import kotlinx.coroutines.launch
-import timber.log.Timber
+import grsoft.com.br.whattowatch.data.response.series.TVShowBodyResponse
 
-class HomeViewModel @ViewModelInject constructor(
+class PopularViewModel @ViewModelInject constructor(
     private val repository: TMDbRepository
 ) : ViewModel() {
+
+    val tvShowBodyResponse: TVShowBodyResponse? = null
 
     val tvShows = repository.getSeries("1")
     val genres = repository.getGenres("en")

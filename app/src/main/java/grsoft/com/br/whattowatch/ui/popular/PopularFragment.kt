@@ -1,4 +1,4 @@
-package grsoft.com.br.whattowatch.ui.home
+package grsoft.com.br.whattowatch.ui.popular
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,26 +8,25 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import grsoft.com.br.whattowatch.data.entities.TVShow
-import grsoft.com.br.whattowatch.data.models.FeedItem
-import grsoft.com.br.whattowatch.databinding.HomeFragmentBinding
-import grsoft.com.br.whattowatch.ui.Feed.FeedAdapter
+import grsoft.com.br.whattowatch.databinding.PopularFragmentBinding
 import grsoft.com.br.whattowatch.ui.adapters.SeriesAdapter
 import grsoft.com.br.whattowatch.utils.Resource
 import timber.log.Timber
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), SeriesAdapter.TVShowItemListener {
-    private var _binding: HomeFragmentBinding? = null
+class PopularFragment : Fragment(), SeriesAdapter.TVShowItemListener {
+    private var _binding: PopularFragmentBinding? = null
     private val binding get() = _binding!!
-    private val homeViewModel: HomeViewModel by viewModels()
-    private lateinit var adapter: FeedAdapter
+    private val popularViewModel: PopularViewModel by viewModels()
+    private lateinit var adapter: SeriesAdapter
     private var mapGenre: Map<Int, String> = hashMapOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        _binding = HomeFragmentBinding.inflate(layoutInflater, container, false)
+        _binding = PopularFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -39,18 +38,21 @@ class HomeFragment : Fragment(), SeriesAdapter.TVShowItemListener {
     }
 
     private fun setupRecyclerView() {
-        adapter = FeedAdapter(this)
-        binding.recyclerHome.adapter = adapter
+//        adapter = FeedAdapter(this)
+        adapter = SeriesAdapter(this)
+        binding.recyclerPopular.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.recyclerPopular.adapter = adapter
+
     }
 
     private fun setupObservers() {
-        homeViewModel.tvShows.observe(viewLifecycleOwner, Observer {
+        popularViewModel.tvShows.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     binding.progressBar.visibility = View.GONE
                     if (!it.data.isNullOrEmpty())
-                        adapter.setItems(ArrayList(homeViewModel.convertToFeed(ArrayList(it.data), mapGenre)))
-//                        adapter.setItems(ArrayList(it.data))
+//                        adapter.setItems(ArrayList(popularViewModel.convertToFeed(ArrayList(it.data), mapGenre)))
+                        adapter.setItems(ArrayList(it.data))
                 }
                 Resource.Status.ERROR ->
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
@@ -60,7 +62,7 @@ class HomeFragment : Fragment(), SeriesAdapter.TVShowItemListener {
             }
         })
 
-        homeViewModel.genres.observe(viewLifecycleOwner, Observer { resource ->
+        popularViewModel.genres.observe(viewLifecycleOwner, Observer { resource ->
             when (resource.status) {
                 Resource.Status.SUCCESS -> {
                     if (!resource.data.isNullOrEmpty())  {
