@@ -1,6 +1,7 @@
 package grsoft.com.br.whattowatch.data.local
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -11,7 +12,7 @@ import grsoft.com.br.whattowatch.data.entities.TVShow
 @Dao
 interface TMDbDao {
     @Query("SELECT * FROM tv_shows")
-    fun getAllSeries() : LiveData<List<TVShow>>
+    fun getAllSeries() : DataSource.Factory<Int, TVShow>
 
     @Query("SELECT * FROM tv_shows WHERE id = :id")
     fun getSeriesById(id: Int): LiveData<TVShow>
