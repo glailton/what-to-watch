@@ -3,14 +3,18 @@ package grsoft.com.br.whattowatch.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.databinding.SeriesItemBinding
-import grsoft.com.br.whattowatch.ui.adapters.SeriesAdapter.HomeViewHolder
 
 class SeriesAdapter(
-    private val listener: TVShowItemListener): RecyclerView.Adapter<HomeViewHolder>() {
+        private val listener: TVShowItemListener
+    ): PagedListAdapter<TVShow, SeriesAdapter.ViewHolder>(diffCallback) {
+
+    private lateinit var recyclerView: RecyclerView
 
     interface TVShowItemListener {
         fun onClicked(tvShow: TVShow)
@@ -24,20 +28,28 @@ class SeriesAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = SeriesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HomeViewHolder(binding, listener)
+        return ViewHolder(binding, listener)
     }
 
-    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        val tvShow = tvShows[position]
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val tvShow = getItem(position)
 
-        holder.bindView(tvShow)
+        tvShow?.let {
+            holder.apply {
+                bindView(tvShow)
+                itemView.tag = tvShow
+            }
+        }
     }
 
-    override fun getItemCount() = tvShows.size
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        this.recyclerView = recyclerView
+    }
 
-    class HomeViewHolder(
+    class ViewHolder(
         binding: SeriesItemBinding,
         private val listener: TVShowItemListener): RecyclerView.ViewHolder(binding.root),
         View.OnClickListener{
@@ -59,5 +71,12 @@ class SeriesAdapter(
             listener.onClicked(tvShow)
         }
 
+    }
+
+    companion object {
+        private val diffCallback = object : DiffUtil.ItemCallback<TVShow>() {
+            override fun areItemsTheSame(oldItem: TVShow, newItem: TVShow): Boolean = oldItem == newItem
+            override fun areContentsTheSame(oldItem: TVShow, newItem: TVShow): Boolean = oldItem == newItem
+        }
     }
 }

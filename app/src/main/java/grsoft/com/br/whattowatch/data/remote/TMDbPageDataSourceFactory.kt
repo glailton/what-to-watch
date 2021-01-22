@@ -24,7 +24,7 @@ class TMDbPageDataSourceFactory @Inject constructor(
     }
 
     companion object {
-        private const val PAGE_SIZE = 20
+        private const val PAGE_SIZE = 100
 
         fun pagedListConfig() = PagedList.Config.Builder()
                 .setInitialLoadSizeHint(PAGE_SIZE)

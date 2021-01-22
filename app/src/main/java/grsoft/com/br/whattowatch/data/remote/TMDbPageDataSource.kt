@@ -18,12 +18,14 @@ class TMDbPageDataSource @Inject constructor(
 ) : PageKeyedDataSource<Int, TVShow>() {
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, TVShow>) {
         fetchData(1) {
+            Timber.v("loadInitial")
             callback.onResult(it, null, 2)
         }
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, TVShow>) {
         val page = params.key
+        Timber.v("loadBefore %s", page.toString())
         fetchData(page) {
             callback.onResult(it, page - 1)
         }
@@ -31,6 +33,7 @@ class TMDbPageDataSource @Inject constructor(
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, TVShow>) {
         val page = params.key
+        Timber.v("loadAfter %s", page.toString())
         fetchData(page) {
             callback.onResult(it, page + 1)
         }

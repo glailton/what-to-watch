@@ -2,6 +2,7 @@ package grsoft.com.br.whattowatch.ui.popular
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import androidx.paging.PagedList
 import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.data.models.FeedItem
 import grsoft.com.br.whattowatch.data.repository.TMDbRepository
@@ -14,15 +15,25 @@ class PopularViewModel @ViewModelInject constructor(
     private val repository: TMDbRepository,
     @CoroutineScropeIO private val io: CoroutineScope
 ) : ViewModel() {
+    lateinit var tvShows: LiveData<PagedList<TVShow>>
 
-    val tvShowBodyResponse: TVShowBodyResponse? = null
+    init {
+        getTvShows()
+    }
+
+    private fun getTvShows() {
+        val lazy by lazy {
+            repository.observePagedTvShow(
+                connectivityAvailable, io
+            )
+        }
+
+        this.tvShows = lazy
+    }
+
     var connectivityAvailable: Boolean = false
 
 //    val tvShows = repository.getSeries("1")
-    val tvShows by lazy {
-        repository.observePagedTvShow(
-                connectivityAvailable, io)
-}
     val genres = repository.getGenres("en")
 
     fun convertToFeed(tvShows: List<TVShow>, genres: Map<Int, String>): List<FeedItem> {
