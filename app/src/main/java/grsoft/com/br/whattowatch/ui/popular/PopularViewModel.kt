@@ -15,25 +15,12 @@ class PopularViewModel @ViewModelInject constructor(
     private val repository: TMDbRepository,
     @CoroutineScropeIO private val io: CoroutineScope
 ) : ViewModel() {
-    lateinit var tvShows: LiveData<PagedList<TVShow>>
 
-    init {
-        getTvShows()
-    }
+    var connectivityAvailable: Boolean = true
 
-    private fun getTvShows() {
-        val lazy by lazy {
-            repository.observePagedTvShow(
-                connectivityAvailable, io
-            )
-        }
+    val tvShows = repository.observePagedTvShow(
+            connectivityAvailable, io)
 
-        this.tvShows = lazy
-    }
-
-    var connectivityAvailable: Boolean = false
-
-//    val tvShows = repository.getSeries("1")
     val genres = repository.getGenres("en")
 
     fun convertToFeed(tvShows: List<TVShow>, genres: Map<Int, String>): List<FeedItem> {
