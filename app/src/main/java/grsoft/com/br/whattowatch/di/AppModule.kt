@@ -13,6 +13,8 @@ import grsoft.com.br.whattowatch.data.local.TMDbDao
 import grsoft.com.br.whattowatch.data.remote.TMDbRemoteDataSource
 import grsoft.com.br.whattowatch.data.remote.TMDbService
 import grsoft.com.br.whattowatch.data.repository.TMDbRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -51,5 +53,9 @@ object AppModule {
     fun provideRepository(remoteDataSource: TMDbRemoteDataSource,
                           localDataSource: TMDbDao) =
         TMDbRepository(remoteDataSource, localDataSource)
+
+    @CoroutineScropeIO
+    @Provides
+    fun provideCoroutineScopeIO() = CoroutineScope(Dispatchers.IO)
 
 }

@@ -7,10 +7,12 @@ import grsoft.com.br.whattowatch.data.response.series.Result
 fun mapperResultToTvShow(results: List<Result>): List<TVShow> {
     var tvShows: MutableList<TVShow> = mutableListOf()
     results.forEach { result ->
+        val backdropPath = if (result.backdropPath.isNullOrBlank()) "" else result.backdropPath
+        val posterPath = if (result.posterPath.isNullOrBlank()) "" else result.posterPath
         val tvShow = TVShow(result.id, result.name, result.firstAirDate, result.genreIds,
             result.originCountry, result.originalLanguage, result.originalName, result.overview,
-            result.popularity, result.posterPath, result.voteAverage, result.voteCount,
-            result.backdropPath)
+            result.popularity, posterPath, result.voteAverage, result.voteCount,
+            backdropPath)
         tvShows.add(tvShow)
     }
 
