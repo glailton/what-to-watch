@@ -6,6 +6,8 @@ class TMDbRemoteDataSource @Inject constructor(
     private val tmdbService: TMDbService
 ): BaseDataSource() {
 
-    suspend fun getSeries(page: String) = getResult { tmdbService.getSeries(page) }
+    suspend fun getPopularSeries(page: String) = getResult { tmdbService.getPopularSeries(page) }
+    suspend fun getTopRatedSeries(page: String) = getResult { tmdbService.getTopRatedSeries(page) }
+    suspend fun getOnTheAirSeries(page: String) = getResult { tmdbService.getOnTheAirSeries(page) }
     suspend fun getGenres(language: String) = getResult { tmdbService.getGenres(language) }
 }

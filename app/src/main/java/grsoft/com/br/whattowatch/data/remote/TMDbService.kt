@@ -11,7 +11,17 @@ import retrofit2.http.Query
 
 interface TMDbService {
     @GET("tv/popular")
-    suspend fun getSeries(
+    suspend fun getPopularSeries(
+            @Query("page") page: String,
+            @Query("api_key") apiKey: String = BuildConfig.API_KEY): Response<TVShowBodyResponse>
+
+    @GET("tv/top_rated")
+    suspend fun getTopRatedSeries(
+            @Query("page") page: String,
+            @Query("api_key") apiKey: String = BuildConfig.API_KEY): Response<TVShowBodyResponse>
+
+    @GET("tv/on_the_air")
+    suspend fun getOnTheAirSeries(
             @Query("page") page: String,
             @Query("api_key") apiKey: String = BuildConfig.API_KEY): Response<TVShowBodyResponse>
 

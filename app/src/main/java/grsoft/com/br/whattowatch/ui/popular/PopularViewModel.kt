@@ -8,18 +8,19 @@ import grsoft.com.br.whattowatch.data.models.FeedItem
 import grsoft.com.br.whattowatch.data.repository.TMDbRepository
 import grsoft.com.br.whattowatch.data.response.series.TVShowBodyResponse
 import grsoft.com.br.whattowatch.di.CoroutineScropeIO
+import grsoft.com.br.whattowatch.utils.Variables
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
 
 class PopularViewModel @ViewModelInject constructor(
-    private val repository: TMDbRepository,
+    repository: TMDbRepository,
     @CoroutineScropeIO private val io: CoroutineScope
 ) : ViewModel() {
 
-    var connectivityAvailable: Boolean = true
+    var connectivityAvailable: Boolean = Variables.isNetworkConnected
 
-    val tvShows = repository.observePagedTvShow(
-            connectivityAvailable, io)
+    val popularTvShows = repository.observePagedTvShow(
+            connectivityAvailable, io, PopularFragment())
 
     val genres = repository.getGenres("en")
 

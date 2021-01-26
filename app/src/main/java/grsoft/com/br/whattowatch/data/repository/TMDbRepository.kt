@@ -1,5 +1,6 @@
 package grsoft.com.br.whattowatch.data.repository
 
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -29,14 +30,15 @@ class TMDbRepository @Inject constructor(
     )
 
     fun observePagedTvShow(connectivityAvailable: Boolean,
-                           coroutineScope: CoroutineScope) =
-            if (connectivityAvailable) observeRemotePagedTvShow(coroutineScope)
+                           coroutineScope: CoroutineScope,
+                           fragment: Fragment) =
+            if (connectivityAvailable) observeRemotePagedTvShow(coroutineScope, fragment)
             else observeLocalPagedTvShow(coroutineScope)
 
-    private fun observeRemotePagedTvShow(coroutineScope: CoroutineScope)
+    private fun observeRemotePagedTvShow(coroutineScope: CoroutineScope, fragment: Fragment)
         : LiveData<PagedList<TVShow>> {
         val dataSourceFactory = TMDbPageDataSourceFactory(remoteDataSource, localDataSource,
-                coroutineScope)
+                coroutineScope, fragment)
         return LivePagedListBuilder(dataSourceFactory,
             TMDbPageDataSourceFactory.pagedListConfig()).build()
     }

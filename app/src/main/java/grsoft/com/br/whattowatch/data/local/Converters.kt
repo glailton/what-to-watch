@@ -20,6 +20,8 @@ class Converters {
 
     @TypeConverter
     fun fromIntToList(string: String): List<Int> {
-        return string.split(",").map { it.toInt() }
+        return if (!string.isNullOrEmpty())
+            string.split(",").map { it.toInt() }
+        else listOf()
     }
 }

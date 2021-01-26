@@ -12,7 +12,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.databinding.PopularFragmentBinding
 import grsoft.com.br.whattowatch.ui.adapters.SeriesAdapter
-import grsoft.com.br.whattowatch.utils.ConnectivityUtil
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -31,7 +30,6 @@ class PopularFragment : Fragment(), SeriesAdapter.TVShowItemListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        popularViewModel.connectivityAvailable = ConnectivityUtil.isConnected(requireContext())
 
         setupRecyclerView()
         setupObservers()
@@ -46,7 +44,7 @@ class PopularFragment : Fragment(), SeriesAdapter.TVShowItemListener {
     }
 
     private fun setupObservers() {
-        popularViewModel.tvShows.observe(viewLifecycleOwner) {
+        popularViewModel.popularTvShows.observe(viewLifecycleOwner) {
             binding.progressBar.visibility = View.GONE
             Timber.d(it.toString())
             adapter.submitList(it)

@@ -1,8 +1,13 @@
 package grsoft.com.br.whattowatch.data.remote
 
+import androidx.fragment.app.Fragment
 import androidx.paging.PageKeyedDataSource
 import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.data.local.TMDbDao
+import grsoft.com.br.whattowatch.data.response.series.TVShowBodyResponse
+import grsoft.com.br.whattowatch.ui.ontheair.OnTheAirFragment
+import grsoft.com.br.whattowatch.ui.popular.PopularFragment
+import grsoft.com.br.whattowatch.ui.rated.TopRatedFragment
 import grsoft.com.br.whattowatch.utils.Resource
 import grsoft.com.br.whattowatch.utils.mapperResultToTvShow
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -14,8 +19,11 @@ import javax.inject.Inject
 class TMDbPageDataSource @Inject constructor(
         private val dataSource: TMDbRemoteDataSource,
         private val dao: TMDbDao,
-        private val scope: CoroutineScope
+        private val scope: CoroutineScope,
+        private val fragment: Fragment
 ) : PageKeyedDataSource<Int, TVShow>() {
+    private lateinit var response: Resource<TVShowBodyResponse>
+
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, TVShow>) {
         fetchData(1) {
             Timber.v("loadInitial")
@@ -41,7 +49,18 @@ class TMDbPageDataSource @Inject constructor(
 
     private fun fetchData(page: Int, callback: (List<TVShow>) -> Unit) {
         scope.launch(getJobErrorHandler()) {
-            val response = dataSource.getSeries(page.toString())
+            when (fragment) {
+                is PopularFragment -> {
+                    response = dataSource.getPopularSeries(page.toString())
+                }
+                is TopRatedFragment -> {
+                    response = dataSource.getTopRatedSeries(page.toString())
+                }
+                is OnTheAirFragment -> {
+                    response = dataSource.getOnTheAirSeries(page.toString())
+                }
+            }
+
             when (response.status) {
                 Resource.Status.SUCCESS -> {
                     val results = response.data!!.results
