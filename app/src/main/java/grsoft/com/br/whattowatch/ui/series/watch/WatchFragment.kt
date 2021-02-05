@@ -1,4 +1,4 @@
-package grsoft.com.br.whattowatch.ui.watch
+package grsoft.com.br.whattowatch.ui.series.watch
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import dagger.hilt.android.AndroidEntryPoint
-import grsoft.com.br.whattowatch.R
 import grsoft.com.br.whattowatch.databinding.WatchFragmentBinding
 
 @AndroidEntryPoint

@@ -1,12 +1,12 @@
 package grsoft.com.br.whattowatch.data.remote
 
 import grsoft.com.br.whattowatch.BuildConfig
-import grsoft.com.br.whattowatch.data.entities.Genre
-import grsoft.com.br.whattowatch.data.response.details.SeriesDetailsBodyResponse
+import grsoft.com.br.whattowatch.data.response.details.TVShowDetailsResponse
 import grsoft.com.br.whattowatch.data.response.genre.GenreResponse
 import grsoft.com.br.whattowatch.data.response.series.TVShowBodyResponse
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TMDbService {
@@ -34,5 +34,12 @@ interface TMDbService {
         @Query("language") language: String,
         @Query("api_key") apiKey: String = BuildConfig.API_KEY
     ): Response<GenreResponse>
+
+    @GET("tv/{tv_id}")
+    suspend fun getDetails(
+            @Path("tv_id") id: Int,
+            @Query("language") language: String,
+            @Query("api_key") apiKey: String = BuildConfig.API_KEY
+    ): Response<TVShowDetailsResponse>
 
 }

@@ -1,4 +1,4 @@
-package grsoft.com.br.whattowatch.ui.ontheair
+package grsoft.com.br.whattowatch.ui.series.ontheair
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel

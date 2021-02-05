@@ -1,7 +1,6 @@
-package grsoft.com.br.whattowatch.ui.adapters
+package grsoft.com.br.whattowatch.ui.series.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -10,15 +9,11 @@ import com.squareup.picasso.Picasso
 import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.databinding.SeriesItemBinding
 
-class SeriesAdapter(
-        private val listener: TVShowItemListener
-    ): PagedListAdapter<TVShow, SeriesAdapter.ViewHolder>(diffCallback) {
+class SeriesAdapter: PagedListAdapter<TVShow, SeriesAdapter.ViewHolder>(diffCallback) {
 
     private lateinit var recyclerView: RecyclerView
 
-    interface TVShowItemListener {
-        fun onClicked(tvShow: TVShow)
-    }
+    var onItemClick: ((entity: TVShow) -> Unit)? = null
 
     private val tvShows: MutableList<TVShow> = mutableListOf()
 
@@ -30,7 +25,7 @@ class SeriesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = SeriesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding, listener)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -49,10 +44,8 @@ class SeriesAdapter(
         this.recyclerView = recyclerView
     }
 
-    class ViewHolder(
-        binding: SeriesItemBinding,
-        private val listener: TVShowItemListener): RecyclerView.ViewHolder(binding.root),
-        View.OnClickListener{
+    inner class ViewHolder(
+        private val binding: SeriesItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         private lateinit var tvShow: TVShow
         private val imageViewPoster = binding.imagePoster
@@ -65,10 +58,10 @@ class SeriesAdapter(
                 .load(BASE_URL + tvShow.posterPath)
                 .into(imageViewPoster)
             title.text = tvShow.name
-        }
 
-        override fun onClick(view: View?) {
-            listener.onClicked(tvShow)
+            binding.root.setOnClickListener {
+                onItemClick?.invoke(tvShow)
+            }
         }
 
     }

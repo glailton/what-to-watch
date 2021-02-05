@@ -1,6 +1,10 @@
 package grsoft.com.br.whattowatch.data.local
 
 import androidx.room.TypeConverter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import grsoft.com.br.whattowatch.data.entities.Genre
+
 
 class Converters {
     @TypeConverter
@@ -23,5 +27,16 @@ class Converters {
         return if (!string.isNullOrEmpty())
             string.split(",").map { it.toInt() }
         else listOf()
+    }
+
+    @TypeConverter
+    fun fromGenreToString(genres: List<Genre>): String {
+        return Gson().toJson(genres)
+    }
+
+    @TypeConverter
+    fun fromStringToGenre(genres: String): List<Genre> {
+        val genresType = object : TypeToken<List<Genre>>() {}.type
+        return Gson().fromJson(genres, genresType)
     }
 }

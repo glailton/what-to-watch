@@ -8,6 +8,7 @@ import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.data.local.TMDbDao
 import grsoft.com.br.whattowatch.data.remote.TMDbPageDataSourceFactory
 import grsoft.com.br.whattowatch.data.remote.TMDbRemoteDataSource
+import grsoft.com.br.whattowatch.utils.mapperResultToDetails
 import grsoft.com.br.whattowatch.utils.mapperResultToGenre
 import grsoft.com.br.whattowatch.utils.performGetOperation
 import kotlinx.coroutines.CoroutineScope
@@ -29,11 +30,17 @@ class TMDbRepository @Inject constructor(
         saveCallResult = { localDataSource.insertAllGenres(mapperResultToGenre(it.genres))}
     )
 
+    fun getDetails(id: Int, language: String) = performGetOperation(
+            databaseQuery = { localDataSource.getDetails(id) },
+            networkCall = { remoteDataSource.getDetails(id, language) },
+            saveCallResult = { localDataSource.insertDetails(mapperResultToDetails(it))}
+    )
+
     fun observePagedTvShow(connectivityAvailable: Boolean,
                            coroutineScope: CoroutineScope,
                            fragment: Fragment) =
             if (connectivityAvailable) observeRemotePagedTvShow(coroutineScope, fragment)
-            else observeLocalPagedTvShow(coroutineScope)
+            else observeLocalPagedTvShow()
 
     private fun observeRemotePagedTvShow(coroutineScope: CoroutineScope, fragment: Fragment)
         : LiveData<PagedList<TVShow>> {
@@ -43,7 +50,7 @@ class TMDbRepository @Inject constructor(
             TMDbPageDataSourceFactory.pagedListConfig()).build()
     }
 
-    private fun observeLocalPagedTvShow(coroutineScope: CoroutineScope)
+    private fun observeLocalPagedTvShow()
         : LiveData<PagedList<TVShow>> {
 
         val dataSourceFactory = localDataSource.getAllSeries()

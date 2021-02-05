@@ -3,18 +3,19 @@
     package="grsoft.com.br.whattowatch">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:usesCleartextTraffic="true"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".MainApplication"
-        android:theme="@style/Theme.WhatToWatch">
-        <activity android:name=".ui.MainActivity">
+        android:theme="@style/Theme.WhatToWatch"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ui.details.DetailsActivity"></activity>
+        <activity android:name=".ui.series.SeriesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
