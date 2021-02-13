@@ -23,7 +23,6 @@ class PopularViewModel @ViewModelInject constructor(
     val genres = repository.getGenres("en")
 
     fun convertToFeed(tvShows: List<TVShow>, genres: Map<Int, String>): List<FeedItem> {
-
         val feedItems = mutableListOf<FeedItem>()
 
         for ((index, genre) in genres) {

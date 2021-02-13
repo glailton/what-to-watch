@@ -30,7 +30,7 @@ fun mapperResultToGenre(results: List<grsoft.com.br.whattowatch.data.response.ge
 }
 
 fun mapperResultToDetails(result: TVShowDetailsResponse): Details {
-//    val createdBy: MutableList<CreatedBy> = mutableListOf()
+//    val createdBy: MutableList<Int> = mutableListOf()
     val genres: MutableList<Genre> = mutableListOf()
     val networks: MutableList<Int> = mutableListOf()
     val productionCompanies: MutableList<Int> = mutableListOf()
@@ -38,7 +38,7 @@ fun mapperResultToDetails(result: TVShowDetailsResponse): Details {
     val seasons: MutableList<Int> = mutableListOf()
     val spokenLanguages: MutableList<String> = mutableListOf()
 //    result.createdBy.forEach {
-//       val createdByEntity = CreatedBy(it.creditId, it.id, it.name, it.gender, it.profilePath.toString())
+//       val createdByEntity = it.id
 //        createdBy.add(createdByEntity)
 //    }
     result.genres.forEach {
@@ -65,14 +65,13 @@ fun mapperResultToDetails(result: TVShowDetailsResponse): Details {
         val spokenLanguage = it.name
         spokenLanguages.add(spokenLanguage)
     }
-    var details = Details(
-            result.id, result.backdropPath, result.createdBy[0].id, result.episodeRunTime, result.firstAirDate,
-            genres, result.homepage, result.inProduction, result.languages, result.lastAirDate,
-            result.lastEpisodeToAir.id, result.name, result.nextEpisodeToAir.id,
-            networks, result.numberOfEpisodes, result.numberOfSeasons, result.originCountry,
-            result.originalLanguage, result.originalName, result.overview, result.popularity,
-            result.posterPath, productionCompanies, productionCountries, seasons, spokenLanguages,
-            result.status, result.tagline, result.type, result.voteAverage, result.voteCount)
 
-    return details
+    return Details(
+        result.id, result.backdropPath, result.createdBy.getOrNull(0)?.id, result.episodeRunTime, result.firstAirDate,
+        genres, result.homepage, result.inProduction, result.languages, result.lastAirDate,
+        result.lastEpisodeToAir.id, result.name, result.nextEpisodeToAir?.let { it.id },
+        networks, result.numberOfEpisodes, result.numberOfSeasons, result.originCountry,
+        result.originalLanguage, result.originalName, result.overview, result.popularity,
+        result.posterPath, productionCompanies, productionCountries, seasons, spokenLanguages,
+        result.status, result.tagline, result.type, result.voteAverage, result.voteCount)
 }

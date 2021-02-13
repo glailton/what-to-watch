@@ -9,7 +9,7 @@ data class Details(
         @PrimaryKey
         val id: Int,
         val backdropPath: String,
-        val createdById: Int,
+        val createdById: Int?,
         val episodeRunTime: List<Int>,
         val firstAirDate: String,
         val genres: List<Genre>,
@@ -19,7 +19,7 @@ data class Details(
         val lastAirDate: String,
         val lastEpisodeToAirId: Int,
         val name: String,
-        val nextEpisodeToAirId: Int,
+        val nextEpisodeToAirId: Int?,
         val networksId: List<Int>,
         val numberOfEpisodes: Int,
         val numberOfSeasons: Int,
