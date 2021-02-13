@@ -2,13 +2,12 @@ package grsoft.com.br.whattowatch.ui.Feed
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import grsoft.com.br.whattowatch.data.models.FeedItem
 import grsoft.com.br.whattowatch.databinding.FeedItemBinding
-import grsoft.com.br.whattowatch.ui.adapters.SeriesAdapter
+import grsoft.com.br.whattowatch.ui.series.adapters.SeriesAdapter
 
-class FeedAdapter(private val listener: SeriesAdapter.TVShowItemListener) : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
+class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
     private var inflater: LayoutInflater? = null
 
@@ -40,7 +39,7 @@ class FeedAdapter(private val listener: SeriesAdapter.TVShowItemListener) : Recy
     inner class ViewHolder(val binding: FeedItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         private val seriesAdapter by lazy {
-            val adapter = SeriesAdapter(listener).apply {
+            val adapter = SeriesAdapter().apply {
                 setHasStableIds(true)
             }
             binding.recyclerSeries.adapter = adapter

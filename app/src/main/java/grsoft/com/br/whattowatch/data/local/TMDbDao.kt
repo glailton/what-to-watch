@@ -6,11 +6,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import grsoft.com.br.whattowatch.data.entities.Details
 import grsoft.com.br.whattowatch.data.entities.Genre
 import grsoft.com.br.whattowatch.data.entities.TVShow
 
 @Dao
 interface TMDbDao {
+
+    //Series
     @Query("SELECT * FROM tv_shows")
     fun getAllSeries() : DataSource.Factory<Int, TVShow>
 
@@ -23,6 +26,7 @@ interface TMDbDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(tvShow: TVShow)
 
+    //Genres
     @Query("SELECT * FROM genres")
     fun getAllGenres() : LiveData<List<Genre>>
 
@@ -34,4 +38,15 @@ interface TMDbDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGenre(genre: Genre)
+
+
+    //Details
+    @Query("SELECT * FROM details WHERE lastEpisodeToAirId = :id")
+    fun getDetails(id: Int): LiveData<Details>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllDetails(genres: List<Details>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertDetails(details: Details)
 }

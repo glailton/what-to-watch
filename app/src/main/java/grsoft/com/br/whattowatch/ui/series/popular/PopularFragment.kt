@@ -1,26 +1,25 @@
-package grsoft.com.br.whattowatch.ui.popular
+package grsoft.com.br.whattowatch.ui.series.popular
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.databinding.PopularFragmentBinding
-import grsoft.com.br.whattowatch.ui.adapters.SeriesAdapter
+import grsoft.com.br.whattowatch.ui.series.adapters.SeriesAdapter
 import timber.log.Timber
 
 @AndroidEntryPoint
-class PopularFragment : Fragment(), SeriesAdapter.TVShowItemListener {
+class PopularFragment : Fragment() {
     private var _binding: PopularFragmentBinding? = null
     private val binding get() = _binding!!
     private val popularViewModel: PopularViewModel by viewModels()
     private lateinit var adapter: SeriesAdapter
-    private var mapGenre: Map<Int, String> = hashMapOf()
+//    private var mapGenre: Map<Int, String> = hashMapOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -37,7 +36,12 @@ class PopularFragment : Fragment(), SeriesAdapter.TVShowItemListener {
 
     private fun setupRecyclerView() {
 //        adapter = FeedAdapter(this)
-        adapter = SeriesAdapter(this)
+        adapter = SeriesAdapter().apply {
+            onItemClick = { tvShow ->
+                val directions = PopularFragmentDirections.actionPopularFragmentToDetailsFragment(tvShow.id)
+                findNavController().navigate(directions)
+            }
+        }
         binding.recyclerPopular.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.recyclerPopular.adapter = adapter
 
@@ -69,10 +73,6 @@ class PopularFragment : Fragment(), SeriesAdapter.TVShowItemListener {
 //                    binding.progressBar.visibility = View.VISIBLE
 //            }
 //        })
-    }
-
-    override fun onClicked(tvShow: TVShow) {
-        Toast.makeText(requireContext(), tvShow.name, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroy() {

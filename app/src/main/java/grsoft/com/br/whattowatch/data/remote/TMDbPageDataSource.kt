@@ -5,9 +5,9 @@ import androidx.paging.PageKeyedDataSource
 import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.data.local.TMDbDao
 import grsoft.com.br.whattowatch.data.response.series.TVShowBodyResponse
-import grsoft.com.br.whattowatch.ui.ontheair.OnTheAirFragment
-import grsoft.com.br.whattowatch.ui.popular.PopularFragment
-import grsoft.com.br.whattowatch.ui.rated.TopRatedFragment
+import grsoft.com.br.whattowatch.ui.series.ontheair.OnTheAirFragment
+import grsoft.com.br.whattowatch.ui.series.popular.PopularFragment
+import grsoft.com.br.whattowatch.ui.series.rated.TopRatedFragment
 import grsoft.com.br.whattowatch.utils.Resource
 import grsoft.com.br.whattowatch.utils.mapperResultToTvShow
 import kotlinx.coroutines.CoroutineExceptionHandler

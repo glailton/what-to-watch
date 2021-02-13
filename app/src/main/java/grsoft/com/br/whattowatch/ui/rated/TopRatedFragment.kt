@@ -1,25 +1,18 @@
-package grsoft.com.br.whattowatch.ui.rated
+package grsoft.com.br.whattowatch.ui.series.rated
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import grsoft.com.br.whattowatch.R
-import grsoft.com.br.whattowatch.data.entities.TVShow
-import grsoft.com.br.whattowatch.databinding.PopularFragmentBinding
 import grsoft.com.br.whattowatch.databinding.TopRatedFragmentBinding
-import grsoft.com.br.whattowatch.ui.adapters.SeriesAdapter
-import grsoft.com.br.whattowatch.ui.popular.PopularViewModel
-import timber.log.Timber
+import grsoft.com.br.whattowatch.ui.series.adapters.SeriesAdapter
 
 @AndroidEntryPoint
-class TopRatedFragment : Fragment(), SeriesAdapter.TVShowItemListener {
+class TopRatedFragment : Fragment() {
 
     private var _binding: TopRatedFragmentBinding? = null
     private val binding get() = _binding!!
@@ -40,7 +33,7 @@ class TopRatedFragment : Fragment(), SeriesAdapter.TVShowItemListener {
     }
 
     private fun setupRecyclerView() {
-        adapter = SeriesAdapter(this)
+        adapter = SeriesAdapter()
         binding.recyclerTopRated.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.recyclerTopRated.adapter = adapter
 
@@ -56,9 +49,5 @@ class TopRatedFragment : Fragment(), SeriesAdapter.TVShowItemListener {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-
-    override fun onClicked(tvShow: TVShow) {
-        Toast.makeText(requireContext(), tvShow.name, Toast.LENGTH_LONG).show()
     }
 }

@@ -1,7 +1,7 @@
 package grsoft.com.br.whattowatch.utils
 
-import grsoft.com.br.whattowatch.data.entities.Genre
-import grsoft.com.br.whattowatch.data.entities.TVShow
+import grsoft.com.br.whattowatch.data.entities.*
+import grsoft.com.br.whattowatch.data.response.details.TVShowDetailsResponse
 import grsoft.com.br.whattowatch.data.response.series.Result
 
 fun mapperResultToTvShow(results: List<Result>): List<TVShow> {
@@ -27,4 +27,52 @@ fun mapperResultToGenre(results: List<grsoft.com.br.whattowatch.data.response.ge
     }
 
     return genres
+}
+
+fun mapperResultToDetails(result: TVShowDetailsResponse): Details {
+//    val createdBy: MutableList<CreatedBy> = mutableListOf()
+    val genres: MutableList<Genre> = mutableListOf()
+    val networks: MutableList<Int> = mutableListOf()
+    val productionCompanies: MutableList<Int> = mutableListOf()
+    val productionCountries: MutableList<String> = mutableListOf()
+    val seasons: MutableList<Int> = mutableListOf()
+    val spokenLanguages: MutableList<String> = mutableListOf()
+//    result.createdBy.forEach {
+//       val createdByEntity = CreatedBy(it.creditId, it.id, it.name, it.gender, it.profilePath.toString())
+//        createdBy.add(createdByEntity)
+//    }
+    result.genres.forEach {
+        val genre = Genre(it.id, it.name)
+        genres.add(genre)
+    }
+    result.networks.forEach {
+        val networkId = it.id
+        networks.add(networkId)
+    }
+    result.productionCompanies.forEach {
+        val productionCompany = it.id
+        productionCompanies.add(productionCompany)
+    }
+    result.productionCountries.forEach {
+        val productionCountry = it.name
+        productionCountries.add(productionCountry)
+    }
+    result.seasons.forEach {
+        val season = it.id
+        seasons.add(season)
+    }
+    result.spokenLanguages.forEach {
+        val spokenLanguage = it.name
+        spokenLanguages.add(spokenLanguage)
+    }
+    var details = Details(
+            result.id, result.backdropPath, result.createdBy[0].id, result.episodeRunTime, result.firstAirDate,
+            genres, result.homepage, result.inProduction, result.languages, result.lastAirDate,
+            result.lastEpisodeToAir.id, result.name, result.nextEpisodeToAir.id,
+            networks, result.numberOfEpisodes, result.numberOfSeasons, result.originCountry,
+            result.originalLanguage, result.originalName, result.overview, result.popularity,
+            result.posterPath, productionCompanies, productionCountries, seasons, spokenLanguages,
+            result.status, result.tagline, result.type, result.voteAverage, result.voteCount)
+
+    return details
 }

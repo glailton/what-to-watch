@@ -1,12 +1,10 @@
-package grsoft.com.br.whattowatch.ui.popular
+package grsoft.com.br.whattowatch.ui.series.popular
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import androidx.paging.PagedList
 import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.data.models.FeedItem
 import grsoft.com.br.whattowatch.data.repository.TMDbRepository
-import grsoft.com.br.whattowatch.data.response.series.TVShowBodyResponse
 import grsoft.com.br.whattowatch.di.CoroutineScropeIO
 import grsoft.com.br.whattowatch.utils.Variables
 import kotlinx.coroutines.CoroutineScope
