@@ -7,11 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import grsoft.com.br.whattowatch.R
+import grsoft.com.br.whattowatch.data.entities.Details
 
 class AboutFragment : Fragment() {
 
     companion object {
-        fun newInstance() = AboutFragment()
+        fun newInstance(details: Details): AboutFragment {
+            val aboutFragment = AboutFragment()
+            val args = Bundle()
+            return aboutFragment
+        }
     }
 
     private lateinit var viewModel: AboutViewModel

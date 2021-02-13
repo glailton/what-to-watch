@@ -2,6 +2,7 @@ package grsoft.com.br.whattowatch.data.repository
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.distinctUntilChanged
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import grsoft.com.br.whattowatch.data.entities.TVShow
@@ -13,7 +14,12 @@ import grsoft.com.br.whattowatch.utils.mapperResultToGenre
 import grsoft.com.br.whattowatch.utils.performGetOperation
 import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
+import javax.inject.Singleton
 
+/**
+ * Repository module for handling data operations.
+ */
+@Singleton
 class TMDbRepository @Inject constructor(
     private val remoteDataSource: TMDbRemoteDataSource,
     private val localDataSource: TMDbDao

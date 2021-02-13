@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import grsoft.com.br.whattowatch.databinding.PopularFragmentBinding
 import grsoft.com.br.whattowatch.ui.series.adapters.SeriesAdapter
+import grsoft.com.br.whattowatch.utils.Resource
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -50,20 +52,19 @@ class PopularFragment : Fragment() {
     private fun setupObservers() {
         popularViewModel.popularTvShows.observe(viewLifecycleOwner) {
             binding.progressBar.visibility = View.GONE
-            Timber.d(it.toString())
             adapter.submitList(it)
 //            TODO Use this code when grouping tv shows by genre
 //            adapter.setItems(ArrayList(popularViewModel.convertToFeed(ArrayList(it.data), mapGenre)))
 //            if (!it.isNullOrEmpty()) adapter.setItems(ArrayList(it))
         }
 
-//        popularViewModel.genres.observe(viewLifecycleOwner, Observer { resource ->
+//        popularViewModel.genres.observe(viewLifecycleOwner) { resource ->
 //            when (resource.status) {
 //                Resource.Status.SUCCESS -> {
 //                    if (!resource.data.isNullOrEmpty())  {
 //                        val genres = resource.data
-//                        mapGenre = genres.associateBy({it.id}, {it.name})
-//                        Timber.d(mapGenre.toString())
+////                        mapGenre = genres.associateBy({it.id}, {it.name})
+////                        Timber.d(mapGenre.toString())
 //                    }
 //                }
 //                Resource.Status.ERROR ->
@@ -72,7 +73,7 @@ class PopularFragment : Fragment() {
 //                Resource.Status.LOADING ->
 //                    binding.progressBar.visibility = View.VISIBLE
 //            }
-//        })
+//        }
     }
 
     override fun onDestroy() {

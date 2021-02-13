@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.databinding.SeriesItemBinding
+import grsoft.com.br.whattowatch.utils.BASE_URL
 
 class SeriesAdapter: PagedListAdapter<TVShow, SeriesAdapter.ViewHolder>(diffCallback) {
 
@@ -50,7 +51,6 @@ class SeriesAdapter: PagedListAdapter<TVShow, SeriesAdapter.ViewHolder>(diffCall
         private lateinit var tvShow: TVShow
         private val imageViewPoster = binding.imagePoster
         private var title = binding.tvTitle
-        private val BASE_URL: String = "https://image.tmdb.org/t/p/w185"
 
         fun bindView(tvShow: TVShow) {
             this.tvShow = tvShow

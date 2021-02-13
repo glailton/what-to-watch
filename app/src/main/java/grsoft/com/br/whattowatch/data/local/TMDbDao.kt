@@ -41,7 +41,7 @@ interface TMDbDao {
 
 
     //Details
-    @Query("SELECT * FROM details WHERE lastEpisodeToAirId = :id")
+    @Query("SELECT * FROM details WHERE id = :id")
     fun getDetails(id: Int): LiveData<Details>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

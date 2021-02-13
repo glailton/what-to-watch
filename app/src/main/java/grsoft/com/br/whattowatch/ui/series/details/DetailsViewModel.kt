@@ -4,11 +4,14 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import grsoft.com.br.whattowatch.data.entities.Details
 import grsoft.com.br.whattowatch.data.repository.TMDbRepository
+import grsoft.com.br.whattowatch.di.CoroutineScropeIO
 import grsoft.com.br.whattowatch.utils.Resource
 import grsoft.com.br.whattowatch.utils.Variables
+import kotlinx.coroutines.CoroutineScope
 
 class DetailsViewModel @ViewModelInject constructor(
-        private val repository: TMDbRepository
+        repository: TMDbRepository,
+        @CoroutineScropeIO private val io: CoroutineScope
 ) : ViewModel() {
     var connectivityAvailable: Boolean = Variables.isNetworkConnected
 
@@ -17,10 +20,9 @@ class DetailsViewModel @ViewModelInject constructor(
     private val _details = _id.switchMap { id ->
         repository.getDetails(id, "en")
     }
-    val details: LiveData<Resource<Details>> = _details
+    val details: LiveData<Resource<Details>> get() = _details
 
     fun start(id: Int) {
-        _id.value = id
+        _id.postValue(id)
     }
-
 }
