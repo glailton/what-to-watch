@@ -1,4 +1,4 @@
-package grsoft.com.br.whattowatch.ui.rated
+package grsoft.com.br.whattowatch.ui.series.rated
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

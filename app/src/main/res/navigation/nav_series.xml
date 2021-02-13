@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/topRatedFragment"
-        android:name="grsoft.com.br.whattowatch.ui.rated.TopRatedFragment"
+        android:name="grsoft.com.br.whattowatch.ui.series.rated.TopRatedFragment"
         android:label="@string/top_rated_title_label"
         tools:layout="@layout/top_rated_fragment" >
         <action
