@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import grsoft.com.br.whattowatch.data.repository.TMDbRepository
 import grsoft.com.br.whattowatch.di.CoroutineScropeIO
+import grsoft.com.br.whattowatch.ui.rated.TopRatedFragment
 import grsoft.com.br.whattowatch.utils.Variables
 import kotlinx.coroutines.CoroutineScope
 

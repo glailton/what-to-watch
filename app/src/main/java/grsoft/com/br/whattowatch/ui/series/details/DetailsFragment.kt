@@ -69,7 +69,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun setupToolbarOptions() {
-        binding.tabToolbar.setNavigationIcon(R.drawable.ic_baseline_home)
+        binding.tabToolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back)
         binding.tabToolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }

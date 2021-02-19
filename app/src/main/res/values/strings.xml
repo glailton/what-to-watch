@@ -28,4 +28,7 @@
     <!-- On The Air Fragment -->
     <string name="on_the_air_title_label">On The Air</string>
 
+    <!-- About Fragment -->
+    <string name="synopsis_label">Synopsis</string>
+
 </resources>

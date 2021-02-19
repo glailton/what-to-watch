@@ -1,10 +1,14 @@
 package grsoft.com.br.whattowatch.data.entities
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
 
 @Entity(tableName = "details")
+@Parcelize
 data class Details(
         @PrimaryKey
         val id: Int,
@@ -12,7 +16,7 @@ data class Details(
         val createdById: Int?,
         val episodeRunTime: List<Int>,
         val firstAirDate: String,
-        val genres: List<Genre>,
+        val genres: @RawValue List<Genre>,
         val homepage: String,
         val inProduction: Boolean,
         val languages: List<String>,
@@ -38,7 +42,7 @@ data class Details(
         val tvShowType: String,
         val voteAverage: Double,
         val voteCount: Int
-)
+): Parcelable
 
 //data class CreatedBy(
 //        val creditId: String = "",

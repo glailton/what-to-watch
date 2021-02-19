@@ -8,14 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import grsoft.com.br.whattowatch.R
 import grsoft.com.br.whattowatch.data.entities.Details
+import grsoft.com.br.whattowatch.databinding.AboutFragmentBinding
+import grsoft.com.br.whattowatch.databinding.DetailsFragmentBinding
 
 class AboutFragment : Fragment() {
 
+    private lateinit var details: Details
+    private var _binding: AboutFragmentBinding? = null
+    private val binding get() = _binding!!
+
     companion object {
-        fun newInstance(details: Details): AboutFragment {
-            val aboutFragment = AboutFragment()
-            val args = Bundle()
-            return aboutFragment
+        fun newInstance(details: Details) = AboutFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable("details", details)
+            }
         }
     }
 
@@ -25,13 +31,22 @@ class AboutFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.about_fragment, container, false)
+        _binding = AboutFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AboutViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        arguments?.getParcelable<Details>("details")?.let {
+            details = it
+            binding.textViewDescription.text = details.overview
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

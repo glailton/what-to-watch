@@ -1,4 +1,4 @@
-package grsoft.com.br.whattowatch.ui.series.rated
+package grsoft.com.br.whattowatch.ui.rated
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import grsoft.com.br.whattowatch.databinding.TopRatedFragmentBinding
 import grsoft.com.br.whattowatch.ui.series.adapters.SeriesAdapter
+import grsoft.com.br.whattowatch.ui.series.rated.TopRatedViewModel
 
 @AndroidEntryPoint
 class TopRatedFragment : Fragment() {
