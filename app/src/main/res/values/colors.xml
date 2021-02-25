@@ -10,18 +10,18 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- light theme -->
-    <color name="dark_primary_color">#0097A7</color>
-    <color name="light_primary_color">#B2EBF2</color>
-    <color name="primary_color">#00BCD4</color>
-    <color name="accent_color">#03A9F4</color>
+    <color name="dark_primary_color">#455a64</color>
+    <color name="light_primary_color">#cfd8dc</color>
+    <color name="primary_color">#607d8b</color>
+    <color name="accent_color">#ff5722</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
 
     <!-- dark theme -->
-    <color name="dark_primary_color_dark">#616161</color>
-    <color name="light_primary_color_dark">#F5F5F5</color>
-    <color name="primary_color_dark">#9E9E9E</color>
-    <color name="accent_color_dark">#607D8B</color>
+    <color name="dark_primary_color_dark">#010400</color>
+    <color name="light_primary_color_dark">#FFFBFC</color>
+    <color name="primary_color_dark">#30332E</color>
+    <color name="accent_color_dark">#62BBC1</color>
     <color name="primary_text_dark">#212121</color>
     <color name="secondary_text_dark">#757575</color>
     <color name="grey_700">#616161</color>

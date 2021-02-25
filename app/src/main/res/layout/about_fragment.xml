@@ -6,25 +6,132 @@
     android:layout_height="match_parent"
     tools:context=".ui.series.details.about.AboutFragment">
 
-    <TextView
-        android:id="@+id/textViewSynopsis"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        fontPath="fonts/GoogleSans-Medium.ttf"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_margin="18dp"
-        android:text="@string/synopsis_label"
+    <View
+        android:id="@+id/view_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/content_margin_half"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewDescription"
-        android:layout_width="match_parent"
+        android:id="@+id/label_duration"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/duration_label"
+        style="@style/Text"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/label_language"
+        app:layout_constraintTop_toBottomOf="@+id/text_duration" />
+
+    <TextView
+        android:id="@+id/text_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+        app:layout_constraintEnd_toEndOf="@+id/label_duration"
+        app:layout_constraintStart_toStartOf="@+id/label_duration"
+        app:layout_constraintTop_toBottomOf="@+id/view_divider"
+        tools:text="@tools:sample/date/hhmm"
+        app:drawableStartCompat="@drawable/ic_baseline_av_timer" />
+
+    <TextView
+        android:id="@+id/label_vote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        style="@style/Text"
+        app:layout_constraintEnd_toStartOf="@+id/label_language"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSynopsis"
+        app:layout_constraintTop_toBottomOf="@+id/text_vote"
+        tools:text="233 votes" />
+
+    <TextView
+        android:id="@+id/text_vote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+        app:layout_constraintEnd_toEndOf="@+id/label_vote"
+        app:layout_constraintStart_toStartOf="@+id/label_vote"
+        app:layout_constraintTop_toTopOf="@+id/text_duration"
+        tools:text="7/10"
+        app:drawableStartCompat="@drawable/ic_baseline_star_rate" />
+
+    <TextView
+        android:id="@+id/label_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/language_label"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        style="@style/Text"
+        app:layout_constraintEnd_toStartOf="@+id/label_duration"
+        app:layout_constraintStart_toEndOf="@+id/label_vote"
+        app:layout_constraintTop_toBottomOf="@+id/text_language" />
+
+    <TextView
+        android:id="@+id/text_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+        app:layout_constraintEnd_toEndOf="@+id/label_language"
+        app:layout_constraintStart_toStartOf="@+id/label_language"
+        app:layout_constraintTop_toTopOf="@+id/text_vote"
+        tools:text="En"
+        app:drawableStartCompat="@drawable/ic_baseline_language" />
+
+    <View
+        android:id="@+id/view_divider_bottom"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_vote" />
+
+    <TextView
+        android:id="@+id/label_overview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        style="@style/Text"
+        android:text="@string/overview_label"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_divider_bottom" />
+
+    <TextView
+        android:id="@+id/text_overview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@{movieDetails.movie.overview}"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        style="@style/Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_overview"
         tools:text="@tools:sample/lorem" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_big">16dp</dimen>
+    <dimen name="margin_top_tv_show_details_top_corner">32dp</dimen>
+    <dimen name="margin_default">8dp</dimen>
+    <dimen name="text_size_tv_show_details_title">20sp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="corner_radius_tv_show_details_cover">3dp</dimen>
+    <dimen name="card_elevation_tv_show_details_cover">4dp</dimen>
+    <dimen name="width_tv_show_details_cover">120dp</dimen>
+    <dimen name="height_tv_show_details_cover">170dp</dimen>
+    <dimen name="show_overview_title_margin_bottom">212dp</dimen>
+    <dimen name="show_overview_collapsing_toolbar_height">350dp</dimen>
+    <dimen name="content_margin_full">16dp</dimen>
+    <dimen name="show_overview_backdrop_height">180dp</dimen>
+    <dimen name="show_overview_height">192dp</dimen>
+    <dimen name="show_overview_poster_width">123dp</dimen>
+    <dimen name="show_overview_poster_height">180dp</dimen>
+    <dimen name="content_margin_half">8dp</dimen>
+    <dimen name="content_margin_full_double">32dp</dimen>
+    <dimen name="poster_card_corner_radius">6dp</dimen>
+    <dimen name="poster_elevation_default">2dp</dimen>
+</resources>

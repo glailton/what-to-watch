@@ -3,6 +3,8 @@ package grsoft.com.br.whattowatch.ui.series.details
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -10,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import grsoft.com.br.whattowatch.R
 import grsoft.com.br.whattowatch.data.entities.Details
@@ -19,6 +22,13 @@ import grsoft.com.br.whattowatch.ui.series.details.adapters.ViewPageAdapter
 import grsoft.com.br.whattowatch.ui.series.details.episodes.EpisodesFragment
 import grsoft.com.br.whattowatch.utils.BASE_URL
 import grsoft.com.br.whattowatch.utils.Resource
+import android.text.SpannableString
+import android.text.TextUtils
+import android.text.style.BulletSpan
+import androidx.core.view.contains
+import androidx.core.view.size
+import com.google.android.material.chip.Chip
+
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
@@ -26,12 +36,27 @@ class DetailsFragment : Fragment() {
     private var _binding: DetailsFragmentBinding? = null
     private val binding get() = _binding!!
     private val detailsViewModel: DetailsViewModel by viewModels()
+    private var title: String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         _binding = DetailsFragmentBinding.inflate(inflater, container, false)
 
         setupToolbarOptions()
+
+        binding.appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            when {
+                kotlin.math.abs(verticalOffset) - appBarLayout.totalScrollRange == 0 -> {
+                    binding.showOverviewContent.visibility = GONE
+                }
+                verticalOffset == 0 -> {
+                    binding.showOverviewContent.visibility = VISIBLE
+                }
+                else -> {
+                    binding.showOverviewContent.visibility = VISIBLE
+                }
+            }
+        })
 
         return binding.root
     }
@@ -55,14 +80,14 @@ class DetailsFragment : Fragment() {
                         bindView(binding, resource.data)
                         setupViewPager(resource.data)
                     }
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.visibility = GONE
                 }
 
                 Resource.Status.ERROR ->
                     Toast.makeText(activity, resource.message, Toast.LENGTH_SHORT).show()
 
                 Resource.Status.LOADING -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.visibility = VISIBLE
                 }
             }
         }
@@ -86,10 +111,24 @@ class DetailsFragment : Fragment() {
     private fun bindView(binding: DetailsFragmentBinding, details: Details) {
         details.apply {
             binding.collapsingToolbar.title = details.name
+            binding.showYearStatus.text = getString(R.string.year_airs_label, details.firstAirDate.substring(0, 4), details.status)
             Glide.with(this@DetailsFragment)
                     .load(BASE_URL + details.backdropPath)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(binding.htabHeader);
+                    .into(binding.imageHeaderTab)
+            Glide.with(this@DetailsFragment)
+                    .load(BASE_URL + details.posterPath)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(binding.poster)
+            details.genres.forEach { genre ->
+                val chip = Chip(context)
+                with(binding) {
+                    chip.text = genre.name
+                    if (genreChipGroup.size < details.genres.size) {
+                        genreChipGroup.addView(chip)
+                    }
+                }
+            }
         }
     }
 

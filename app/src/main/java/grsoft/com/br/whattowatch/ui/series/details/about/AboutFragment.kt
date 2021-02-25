@@ -1,6 +1,5 @@
 package grsoft.com.br.whattowatch.ui.series.details.about
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,11 +8,9 @@ import android.view.ViewGroup
 import grsoft.com.br.whattowatch.R
 import grsoft.com.br.whattowatch.data.entities.Details
 import grsoft.com.br.whattowatch.databinding.AboutFragmentBinding
-import grsoft.com.br.whattowatch.databinding.DetailsFragmentBinding
 
 class AboutFragment : Fragment() {
 
-    private lateinit var details: Details
     private var _binding: AboutFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -39,9 +36,16 @@ class AboutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.getParcelable<Details>("details")?.let {
-            details = it
-            binding.textViewDescription.text = details.overview
+            bindView(it)
         }
+    }
+
+    private fun bindView(details: Details) {
+        binding.textOverview.text = details.overview
+        binding.textDuration.text = getString(R.string.duration_text, details.episodeRunTime.first())
+        binding.textLanguage.text = details.originalLanguage.capitalize()
+        binding.textVote.text = details.voteAverage.toString()
+        binding.labelVote.text = getString(R.string.votes_text, details.voteCount)
     }
 
     override fun onDestroy() {

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.WhatToWatch" parent="Theme.AppCompat.NoActionBar">
+    <style name="Theme.WhatToWatch" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary_color_dark</item>
         <item name="colorPrimaryVariant">@color/dark_primary_color_dark</item>
@@ -20,6 +20,61 @@
 
     <style name="BottomNavigation" parent="Widget.AppCompat.Toolbar.Button.Navigation">
         <item name="android:background">@color/primary_color_dark</item>
+    </style>
+
+    <style name="TextView">
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="TextView.normalText">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">#C0C0C0</item>
+    </style>
+
+    <style name="TextAppearance">
+    </style>
+    <style name="TextAppearance.ShowOverview">
+    </style>
+    <style name="TextAppearance.ShowOverview.Title">
+    </style>
+    <style name="TextAppearance.ShowOverview.Title.Collapsed">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/centuma_medium_font</item>
+        <item name="fontFamily">@font/centuma_medium_font</item>
+    </style>
+    <style name="TextAppearance.ShowOverview.Title.Expanded">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/centuma_medium_font</item>
+        <item name="fontFamily">@font/centuma_medium_font</item>
+    </style>
+    <style name="Text" >
+        <item name="android:textColor">@color/light_primary_color_dark</item>
+    </style>
+    <style name="TextAppearance.Title">
+        <item name="android:fontFamily">@font/centuma_medium_font</item>
+        <item name="fontFamily">@font/centuma_medium_font</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.Subtitle1">
+        <item name="android:fontFamily">@font/centuma_medium_font</item>
+        <item name="fontFamily">@font/centuma_medium_font</item>
+    </style>
+    <style name="TextAppearance.Subtitle2">
+        <item name="android:fontFamily">@font/centuma_font</item>
+        <item name="fontFamily">@font/centuma_font</item>
+    </style>
+
+    <style name="Widget">
+    </style>
+    <style name="Widget.CardView">
+    </style>
+
+    <style name="Widget.CardView.Poster">
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="cardCornerRadius">@dimen/poster_card_corner_radius</item>
+        <item name="cardElevation">@dimen/poster_elevation_default</item>
     </style>
 
 </resources>
