@@ -2,7 +2,9 @@ package grsoft.com.br.whattowatch.utils
 
 import grsoft.com.br.whattowatch.data.entities.*
 import grsoft.com.br.whattowatch.data.response.details.TVShowDetailsResponse
+import grsoft.com.br.whattowatch.data.response.network.NetworkResponse
 import grsoft.com.br.whattowatch.data.response.series.Result
+import grsoft.com.br.whattowatch.data.response.videos.VideosResponse
 
 fun mapperResultToTvShow(results: List<Result>): List<TVShow> {
     var tvShows: MutableList<TVShow> = mutableListOf()
@@ -30,24 +32,20 @@ fun mapperResultToGenre(results: List<grsoft.com.br.whattowatch.data.response.ge
 }
 
 fun mapperResultToDetails(result: TVShowDetailsResponse): Details {
-//    val createdBy: MutableList<Int> = mutableListOf()
     val genres: MutableList<Genre> = mutableListOf()
-    val networks: MutableList<Int> = mutableListOf()
+    val networks: MutableList<Network> = mutableListOf()
     val productionCompanies: MutableList<Int> = mutableListOf()
     val productionCountries: MutableList<String> = mutableListOf()
     val seasons: MutableList<Int> = mutableListOf()
     val spokenLanguages: MutableList<String> = mutableListOf()
-//    result.createdBy.forEach {
-//       val createdByEntity = it.id
-//        createdBy.add(createdByEntity)
-//    }
+
     result.genres.forEach {
         val genre = Genre(it.id, it.name)
         genres.add(genre)
     }
     result.networks.forEach {
-        val networkId = it.id
-        networks.add(networkId)
+        val network = Network(it.id, it.logoPath, it.name, it.originCountry)
+        networks.add(network)
     }
     result.productionCompanies.forEach {
         val productionCompany = it.id
@@ -74,4 +72,18 @@ fun mapperResultToDetails(result: TVShowDetailsResponse): Details {
         result.originalLanguage, result.originalName, result.overview, result.popularity,
         result.posterPath, productionCompanies, productionCountries, seasons, spokenLanguages,
         result.status, result.tagline, result.type, result.voteAverage, result.voteCount)
+}
+
+fun mapperResultToNetwork(result: NetworkResponse): Network {
+    return Network(result.id, result.logoPath, result.name, result.originCountry)
+}
+
+fun mapperResultToVideos(result: VideosResponse): Videos {
+    val videoList = mutableListOf<VideoList>()
+
+    result.results.forEach {
+        videoList.add(VideoList(it.id, it.iso31661, it.iso6391, it.key, it.name, it.site, it.size, it.type))
+    }
+
+    return Videos(result.id, videoList)
 }

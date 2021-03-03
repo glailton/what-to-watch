@@ -25,6 +25,7 @@ import grsoft.com.br.whattowatch.utils.Resource
 import android.text.SpannableString
 import android.text.TextUtils
 import android.text.style.BulletSpan
+import androidx.core.content.ContextCompat
 import androidx.core.view.contains
 import androidx.core.view.size
 import com.google.android.material.chip.Chip
@@ -36,7 +37,6 @@ class DetailsFragment : Fragment() {
     private var _binding: DetailsFragmentBinding? = null
     private val binding get() = _binding!!
     private val detailsViewModel: DetailsViewModel by viewModels()
-    private var title: String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -111,6 +111,8 @@ class DetailsFragment : Fragment() {
     private fun bindView(binding: DetailsFragmentBinding, details: Details) {
         details.apply {
             binding.collapsingToolbar.title = details.name
+            binding.collapsingToolbar.setExpandedTitleColor(ContextCompat.getColor(requireContext(), android.R.color.transparent))
+            binding.showName.text = details.name
             binding.showYearStatus.text = getString(R.string.year_airs_label, details.firstAirDate.substring(0, 4), details.status)
             Glide.with(this@DetailsFragment)
                     .load(BASE_URL + details.backdropPath)
@@ -120,15 +122,6 @@ class DetailsFragment : Fragment() {
                     .load(BASE_URL + details.posterPath)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(binding.poster)
-            details.genres.forEach { genre ->
-                val chip = Chip(context)
-                with(binding) {
-                    chip.text = genre.name
-                    if (genreChipGroup.size < details.genres.size) {
-                        genreChipGroup.addView(chip)
-                    }
-                }
-            }
         }
     }
 

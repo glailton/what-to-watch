@@ -6,9 +6,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import grsoft.com.br.whattowatch.data.entities.Details
-import grsoft.com.br.whattowatch.data.entities.Genre
-import grsoft.com.br.whattowatch.data.entities.TVShow
+import grsoft.com.br.whattowatch.data.entities.*
 
 @Dao
 interface TMDbDao {
@@ -49,4 +47,24 @@ interface TMDbDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDetails(details: Details)
+
+    //Network
+    @Query("SELECT * FROM network WHERE id = :id")
+    fun getNetwork(id: Int): LiveData<Network>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllNetworks(networks: List<Network>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNetwork(network: Network)
+
+    //Videos
+    @Query("SELECT * FROM videos WHERE id = :id")
+    fun getVideo(id: Int): LiveData<Videos>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllVideos(videos: List<Videos>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertVideo(videos: Videos)
 }

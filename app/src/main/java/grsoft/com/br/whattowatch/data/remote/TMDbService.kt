@@ -3,7 +3,9 @@ package grsoft.com.br.whattowatch.data.remote
 import grsoft.com.br.whattowatch.BuildConfig
 import grsoft.com.br.whattowatch.data.response.details.TVShowDetailsResponse
 import grsoft.com.br.whattowatch.data.response.genre.GenreResponse
+import grsoft.com.br.whattowatch.data.response.network.NetworkResponse
 import grsoft.com.br.whattowatch.data.response.series.TVShowBodyResponse
+import grsoft.com.br.whattowatch.data.response.videos.VideosResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -41,5 +43,18 @@ interface TMDbService {
             @Query("language") language: String,
             @Query("api_key") apiKey: String = BuildConfig.API_KEY
     ): Response<TVShowDetailsResponse>
+
+    @GET("network/{network_id}")
+    suspend fun getNetwork(
+            @Path("network_id") id: Int,
+            @Query("api_key") apiKey: String = BuildConfig.API_KEY
+    ): Response<NetworkResponse>
+
+    @GET("tv/{tv_id}/videos")
+    suspend fun getVideos(
+            @Path("tv_id") id: Int,
+            @Query("language") language: String,
+            @Query("api_key") apiKey: String = BuildConfig.API_KEY
+    ): Response<VideosResponse>
 
 }

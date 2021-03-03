@@ -24,7 +24,7 @@ data class Details(
         val lastEpisodeToAirId: Int,
         val name: String,
         val nextEpisodeToAirId: Int?,
-        val networksId: List<Int>,
+        val networks: @RawValue List<Network>,
         val numberOfEpisodes: Int,
         val numberOfSeasons: Int,
         val originCountry: List<String>,

@@ -2,16 +2,13 @@ package grsoft.com.br.whattowatch.data.repository
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.distinctUntilChanged
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.data.local.TMDbDao
 import grsoft.com.br.whattowatch.data.remote.TMDbPageDataSourceFactory
 import grsoft.com.br.whattowatch.data.remote.TMDbRemoteDataSource
-import grsoft.com.br.whattowatch.utils.mapperResultToDetails
-import grsoft.com.br.whattowatch.utils.mapperResultToGenre
-import grsoft.com.br.whattowatch.utils.performGetOperation
+import grsoft.com.br.whattowatch.utils.*
 import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -40,6 +37,18 @@ class TMDbRepository @Inject constructor(
             databaseQuery = { localDataSource.getDetails(id) },
             networkCall = { remoteDataSource.getDetails(id, language) },
             saveCallResult = { localDataSource.insertDetails(mapperResultToDetails(it))}
+    )
+
+    fun getNetwork(id: Int) = performGetOperation(
+            databaseQuery = { localDataSource.getNetwork(id) },
+            networkCall = { remoteDataSource.getNetwork(id) },
+            saveCallResult = { localDataSource.insertNetwork(mapperResultToNetwork(it))}
+    )
+
+    fun getVideos(id: Int, language: String) = performGetOperation(
+            databaseQuery = { localDataSource.getVideo(id) },
+            networkCall = { remoteDataSource.getVideos(id, language) },
+            saveCallResult = { localDataSource.insertVideo(mapperResultToVideos(it))}
     )
 
     fun observePagedTvShow(connectivityAvailable: Boolean,

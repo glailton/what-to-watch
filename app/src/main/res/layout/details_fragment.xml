@@ -127,26 +127,13 @@
                     tools:text="@tools:sample/lorem"
                     style="?attr/textAppearanceSubtitle1"/>
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/genre_chip_group"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/content_margin_half"
-                    android:layout_marginStart="@dimen/content_margin_full"
-                    android:layout_marginEnd="@dimen/content_margin_full"
-                    app:chipSpacingHorizontal="5dp"
-                    app:singleLine="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/poster_card"
-                    app:layout_constraintTop_toBottomOf="@+id/show_year_status"/>
-
                 <androidx.constraintlayout.widget.Barrier
                     android:id="@+id/barrier"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/content_margin_half"
                     app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="show_name,show_year_status,genre_chip_group" />
+                    app:constraint_referenced_ids="show_name, show_year_status" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
