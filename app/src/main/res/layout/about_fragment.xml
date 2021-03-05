@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:aapt="http://schemas.android.com/aapt"
-    android:paddingBottom="@dimen/episode_card_collapsed_height"
-    android:clipToPadding="false"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:paddingBottom="@dimen/episode_card_collapsed_height">
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.series.details.about.AboutFragment">
@@ -24,13 +25,13 @@
 
         <TextView
             android:id="@+id/label_duration"
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/content_margin_full"
             android:layout_marginTop="@dimen/content_margin_half"
             android:layout_marginEnd="@dimen/content_margin_full"
             android:text="@string/duration_label"
-            style="@style/Text"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/label_language"
@@ -44,21 +45,21 @@
             android:drawablePadding="@dimen/content_margin_half"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            app:drawableStartCompat="@drawable/ic_baseline_av_timer"
             app:layout_constraintEnd_toEndOf="@+id/label_duration"
             app:layout_constraintStart_toStartOf="@+id/label_duration"
             app:layout_constraintTop_toBottomOf="@+id/view_divider"
-            tools:text="@tools:sample/date/hhmm"
-            app:drawableStartCompat="@drawable/ic_baseline_av_timer" />
+            tools:text="@tools:sample/date/hhmm" />
 
         <TextView
             android:id="@+id/label_vote"
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/content_margin_full"
             android:layout_marginTop="@dimen/content_margin_half"
             android:layout_marginEnd="@dimen/content_margin_full"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            style="@style/Text"
             app:layout_constraintEnd_toStartOf="@+id/label_language"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,20 +73,20 @@
             android:drawablePadding="@dimen/content_margin_half"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            app:drawableStartCompat="@drawable/ic_baseline_star_rate"
             app:layout_constraintEnd_toEndOf="@+id/label_vote"
             app:layout_constraintStart_toStartOf="@+id/label_vote"
             app:layout_constraintTop_toTopOf="@+id/text_duration"
-            tools:text="7/10"
-            app:drawableStartCompat="@drawable/ic_baseline_star_rate" />
+            tools:text="7/10" />
 
         <TextView
             android:id="@+id/label_language"
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/content_margin_half"
             android:text="@string/language_label"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            style="@style/Text"
             app:layout_constraintEnd_toStartOf="@+id/label_duration"
             app:layout_constraintStart_toEndOf="@+id/label_vote"
             app:layout_constraintTop_toBottomOf="@+id/text_language" />
@@ -97,11 +98,11 @@
             android:drawablePadding="@dimen/content_margin_half"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            app:drawableStartCompat="@drawable/ic_baseline_language"
             app:layout_constraintEnd_toEndOf="@+id/label_language"
             app:layout_constraintStart_toStartOf="@+id/label_language"
             app:layout_constraintTop_toTopOf="@+id/text_vote"
-            tools:text="En"
-            app:drawableStartCompat="@drawable/ic_baseline_language" />
+            tools:text="En" />
 
         <View
             android:id="@+id/view_divider_bottom"
@@ -115,11 +116,11 @@
 
         <TextView
             android:id="@+id/label_overview"
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/content_margin_full"
             android:layout_marginTop="@dimen/content_margin_full_double"
-            style="@style/Text"
             android:text="@string/overview_label"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,6 +128,7 @@
 
         <TextView
             android:id="@+id/text_overview"
+            style="@style/Text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/content_margin_full"
@@ -134,7 +136,6 @@
             android:layout_marginEnd="@dimen/content_margin_full"
             android:text="@{movieDetails.movie.overview}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            style="@style/Text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_overview"
@@ -142,11 +143,11 @@
 
         <TextView
             android:id="@+id/label_genre"
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/content_margin_full"
             android:layout_marginTop="@dimen/content_margin_full_double"
-            style="@style/Text"
             android:text="@string/genre_label"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             app:layout_constraintStart_toStartOf="parent"
@@ -156,22 +157,22 @@
             android:id="@+id/genre_chip_group"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/content_margin_half"
             android:layout_marginStart="@dimen/content_margin_full"
+            android:layout_marginTop="@dimen/content_margin_half"
             android:layout_marginEnd="@dimen/content_margin_full"
             app:chipSpacingHorizontal="5dp"
-            app:singleLine="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_genre"/>
+            app:layout_constraintTop_toBottomOf="@+id/label_genre"
+            app:singleLine="false" />
 
         <TextView
             android:id="@+id/label_network"
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/content_margin_full"
             android:layout_marginTop="@dimen/content_margin_full_double"
-            style="@style/Text"
             android:text="@string/network_label"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             app:layout_constraintStart_toStartOf="parent"
@@ -181,43 +182,234 @@
             android:id="@+id/network_chip_group"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/content_margin_half"
             android:layout_marginStart="@dimen/content_margin_full"
+            android:layout_marginTop="@dimen/content_margin_half"
             android:layout_marginEnd="@dimen/content_margin_full"
             app:chipSpacingHorizontal="5dp"
-            app:singleLine="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_network"/>
+            app:layout_constraintTop_toBottomOf="@+id/label_network"
+            app:singleLine="false" />
 
         <TextView
-            android:id="@+id/label_trailer"
+            android:id="@+id/info_label"
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/content_margin_full"
             android:layout_marginTop="@dimen/content_margin_full_double"
-            style="@style/Text"
-            android:text="@string/trailer_label"
+            android:text="@string/info_label"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/network_chip_group" />
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="original_title_label,first_air_date_label,last_air_date_label,aired_episodes_label,runtime_label,show_type_label,original_language_label,country_label,companies_label" />
+
+        <TextView
+            android:id="@+id/original_title_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/original_title_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/info_label" />
+
+        <TextView
+            android:id="@+id/original_title_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            tools:text="Original Title"
+            app:layout_constraintStart_toEndOf="@+id/barrier"
+            app:layout_constraintTop_toTopOf="@+id/original_title_label" />
+
+        <TextView
+            android:id="@+id/first_air_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/first_air_date_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/original_title_label" />
+
+        <TextView
+            android:id="@+id/first_air_date_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            tools:text="October 26, 1986"
+            app:layout_constraintStart_toEndOf="@+id/barrier"
+            app:layout_constraintTop_toTopOf="@+id/first_air_date_label" />
+
+        <TextView
+            android:id="@+id/last_air_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/last_air_date_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/first_air_date_label" />
+
+        <TextView
+            android:id="@+id/last_air_date_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            tools:text="March 2, 2020"
+            app:layout_constraintStart_toEndOf="@+id/barrier"
+            app:layout_constraintTop_toTopOf="@+id/last_air_date_label" />
+
+        <TextView
+            android:id="@+id/aired_episodes_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/aired_episodes_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/last_air_date_label" />
+
+        <TextView
+            android:id="@+id/aired_episodes_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            tools:text="10"
+            app:layout_constraintStart_toEndOf="@+id/barrier"
+            app:layout_constraintTop_toTopOf="@+id/aired_episodes_label" />
+
+        <TextView
+            android:id="@+id/runtime_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/runtime_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/aired_episodes_label" />
+
+        <TextView
+            android:id="@+id/runtime_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            tools:text="45"
+            app:layout_constraintStart_toEndOf="@+id/barrier"
+            app:layout_constraintTop_toTopOf="@+id/runtime_label" />
+
+        <TextView
+            android:id="@+id/show_type_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/show_type_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/runtime_label" />
+
+        <TextView
+            android:id="@+id/show_type_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            tools:text="Scripted"
+            app:layout_constraintStart_toEndOf="@+id/barrier"
+            app:layout_constraintTop_toTopOf="@+id/show_type_label" />
+
+        <TextView
+            android:id="@+id/original_language_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/original_language_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/show_type_label" />
+
+        <TextView
+            android:id="@+id/original_language_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            tools:text="Portuguese"
+            app:layout_constraintStart_toEndOf="@+id/barrier"
+            app:layout_constraintTop_toTopOf="@+id/original_language_label" />
+
+        <TextView
+            android:id="@+id/country_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/country_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/original_language_label" />
+
+        <TextView
+            android:id="@+id/country_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            tools:text="Brazil"
+            app:layout_constraintStart_toEndOf="@+id/barrier"
+            app:layout_constraintTop_toTopOf="@+id/country_label" />
+
+        <TextView
+            android:id="@+id/companies_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/companies_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/country_label" />
+
+        <TextView
+            android:id="@+id/companies_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            tools:text="Amazon"
+            app:layout_constraintStart_toEndOf="@+id/barrier"
+            app:layout_constraintTop_toTopOf="@+id/companies_label" />
+
+
+        <TextView
+            android:id="@+id/label_trailer"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/content_margin_full"
+            android:layout_marginTop="@dimen/content_margin_full_double"
+            android:text="@string/trailer_label"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/companies_text" />
+
         <androidx.recyclerview.widget.RecyclerView
-            android:orientation="horizontal"
             android:id="@+id/recycler_view_videos"
-            android:clipToPadding="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:divider="@null"
-            android:layout_marginTop="@dimen/content_margin_half"
             android:layout_marginStart="@dimen/content_margin_full"
+            android:layout_marginTop="@dimen/content_margin_full_double"
             android:layout_marginEnd="@dimen/content_margin_full"
+            android:clipToPadding="false"
+            android:divider="@null"
             android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/videos_item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_trailer"/>
+            app:layout_constraintTop_toBottomOf="@+id/label_trailer"
+            tools:listitem="@layout/videos_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

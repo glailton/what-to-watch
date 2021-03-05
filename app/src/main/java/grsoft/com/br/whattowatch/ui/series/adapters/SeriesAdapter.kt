@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import grsoft.com.br.whattowatch.data.entities.TVShow
 import grsoft.com.br.whattowatch.databinding.SeriesItemBinding
+import grsoft.com.br.whattowatch.ui.extensions.loadImage
 import grsoft.com.br.whattowatch.utils.BASE_URL
 
 class SeriesAdapter: PagedListAdapter<TVShow, SeriesAdapter.ViewHolder>(diffCallback) {
@@ -54,9 +55,7 @@ class SeriesAdapter: PagedListAdapter<TVShow, SeriesAdapter.ViewHolder>(diffCall
 
         fun bindView(tvShow: TVShow) {
             this.tvShow = tvShow
-            Picasso.get()
-                .load(BASE_URL + tvShow.posterPath)
-                .into(imageViewPoster)
+            imageViewPoster.loadImage(BASE_URL + tvShow.posterPath)
             title.text = tvShow.name
 
             binding.root.setOnClickListener {

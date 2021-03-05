@@ -32,6 +32,17 @@
     <string name="overview_label">Overview</string>
     <string name="trailer_label">Trailers</string>
     <string name="genre_label">Genre</string>
+    <string name="info_label">TV Show info</string>
+    <string name="original_title_label">Original Title</string>
+    <string name="first_air_date_label">First Air Date</string>
+    <string name="last_air_date_label">Last Air Date</string>
+    <string name="aired_episodes_label">Aired Episodes</string>
+    <string name="runtime_label">Runtime</string>
+    <string name="show_type_label">Show Type</string>
+    <string name="original_language_label">Original Language</string>
+    <string name="country_label">Country</string>
+    <string name="certification_label">Certification</string>
+    <string name="companies_label">Companies</string>
     <string name="transition_show_poster">show_poster</string>
 
     <!-- Details Fragment -->

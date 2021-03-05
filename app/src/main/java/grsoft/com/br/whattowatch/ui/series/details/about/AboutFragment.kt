@@ -20,6 +20,10 @@ import grsoft.com.br.whattowatch.utils.Resource
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
 import android.net.Uri
+import android.text.TextUtils
+import android.widget.TextView
+import grsoft.com.br.whattowatch.ui.extensions.hide
+import grsoft.com.br.whattowatch.ui.extensions.setTextList
 import grsoft.com.br.whattowatch.utils.YOUTUBE_URL
 
 
@@ -84,7 +88,10 @@ class AboutFragment : Fragment() {
             when (resource.status) {
                 Resource.Status.SUCCESS -> {
                     resource.data?.let {
-                        adapter.setItems(resource.data.results)
+                        if (resource.data.results.isNotEmpty())
+                            adapter.setItems(resource.data.results)
+                        else
+                            binding.labelTrailer.hide()
                     }
                 }
 
@@ -100,9 +107,18 @@ class AboutFragment : Fragment() {
     private fun bindView(details: Details) {
         binding.textOverview.text = details.overview
         binding.textDuration.text = getString(R.string.duration_text, details.episodeRunTime.first())
-        binding.textLanguage.text = details.originalLanguage.capitalize()
+        binding.textLanguage.text = details.originalLanguage?.capitalize()
         binding.textVote.text = details.voteAverage.toString()
         binding.labelVote.text = getString(R.string.votes_text, details.voteCount)
+        binding.originalTitleText.text = details.originalName
+        binding.firstAirDateText.text = details.firstAirDate
+        binding.lastAirDateText.text = details.lastAirDate
+        binding.airedEpisodesText.text = details.numberOfEpisodes.toString()
+        binding.runtimeText.text = TextUtils.join(", ", details.episodeRunTime)
+        binding.showTypeText.text = details.tvShowType
+        binding.originalLanguageText.text = details.originalLanguage
+        binding.countryText.text = TextUtils.join(", ", details.originCountry)
+        binding.companiesText.setTextList(details.companies)
         details.genres.forEach { genre ->
             val chip = Chip(context)
             with(binding) {

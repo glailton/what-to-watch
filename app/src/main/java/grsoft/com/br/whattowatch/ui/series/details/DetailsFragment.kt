@@ -7,28 +7,21 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import grsoft.com.br.whattowatch.R
 import grsoft.com.br.whattowatch.data.entities.Details
 import grsoft.com.br.whattowatch.databinding.DetailsFragmentBinding
+import grsoft.com.br.whattowatch.ui.extensions.loadImage
 import grsoft.com.br.whattowatch.ui.series.details.about.AboutFragment
 import grsoft.com.br.whattowatch.ui.series.details.adapters.ViewPageAdapter
 import grsoft.com.br.whattowatch.ui.series.details.episodes.EpisodesFragment
 import grsoft.com.br.whattowatch.utils.BASE_URL
 import grsoft.com.br.whattowatch.utils.Resource
-import android.text.SpannableString
-import android.text.TextUtils
-import android.text.style.BulletSpan
-import androidx.core.content.ContextCompat
-import androidx.core.view.contains
-import androidx.core.view.size
-import com.google.android.material.chip.Chip
 
 
 @AndroidEntryPoint
@@ -113,15 +106,9 @@ class DetailsFragment : Fragment() {
             binding.collapsingToolbar.title = details.name
             binding.collapsingToolbar.setExpandedTitleColor(ContextCompat.getColor(requireContext(), android.R.color.transparent))
             binding.showName.text = details.name
-            binding.showYearStatus.text = getString(R.string.year_airs_label, details.firstAirDate.substring(0, 4), details.status)
-            Glide.with(this@DetailsFragment)
-                    .load(BASE_URL + details.backdropPath)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(binding.imageHeaderTab)
-            Glide.with(this@DetailsFragment)
-                    .load(BASE_URL + details.posterPath)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(binding.poster)
+            binding.showYearStatus.text = getString(R.string.year_airs_label, details.firstAirDate?.substring(0, 4), details.status)
+            binding.imageHeaderTab.loadImage(BASE_URL + details.backdropPath)
+            binding.poster.loadImage(BASE_URL + details.posterPath)
         }
     }
 

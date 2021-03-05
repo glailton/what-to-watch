@@ -59,6 +59,7 @@
                 android:id="@+id/tab_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="@dimen/content_margin_full"
                 tools:title="tv title"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways"
@@ -90,6 +91,7 @@
                         android:id="@+id/poster"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/ic_baseline_image_24"
                         tools:src="@tools:sample/backgrounds/scenic"
                         android:transitionName="@string/transition_show_poster"/>
                 </com.google.android.material.card.MaterialCardView>

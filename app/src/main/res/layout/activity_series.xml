@@ -15,9 +15,11 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="teste"
+            android:layout_height="75dp"
+            tools:title="teste"
+            android:layout_marginTop="4dp"
             android:theme="@style/Toolbar"
+            android:fitsSystemWindows="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,6 +45,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/activity_main_bottom_series"
             style="@style/BottomNavigation"
+            android:layout_marginBottom="@dimen/content_margin_full"
             android:fitsSystemWindows="true"
             app:itemIconTint="@drawable/tab_color"
             app:itemTextColor="@drawable/tab_color"

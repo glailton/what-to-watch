@@ -34,7 +34,7 @@ fun mapperResultToGenre(results: List<grsoft.com.br.whattowatch.data.response.ge
 fun mapperResultToDetails(result: TVShowDetailsResponse): Details {
     val genres: MutableList<Genre> = mutableListOf()
     val networks: MutableList<Network> = mutableListOf()
-    val productionCompanies: MutableList<Int> = mutableListOf()
+    val companies: MutableList<ProductionCompany> = mutableListOf()
     val productionCountries: MutableList<String> = mutableListOf()
     val seasons: MutableList<Int> = mutableListOf()
     val spokenLanguages: MutableList<String> = mutableListOf()
@@ -48,8 +48,8 @@ fun mapperResultToDetails(result: TVShowDetailsResponse): Details {
         networks.add(network)
     }
     result.productionCompanies.forEach {
-        val productionCompany = it.id
-        productionCompanies.add(productionCompany)
+        val productionCompany = ProductionCompany(it.id, it.logoPath, it.name, it.originCountry)
+        companies.add(productionCompany)
     }
     result.productionCountries.forEach {
         val productionCountry = it.name
@@ -70,7 +70,7 @@ fun mapperResultToDetails(result: TVShowDetailsResponse): Details {
         result.lastEpisodeToAir.id, result.name, result.nextEpisodeToAir?.let { it.id },
         networks, result.numberOfEpisodes, result.numberOfSeasons, result.originCountry,
         result.originalLanguage, result.originalName, result.overview, result.popularity,
-        result.posterPath, productionCompanies, productionCountries, seasons, spokenLanguages,
+        result.posterPath, companies, productionCountries, seasons, spokenLanguages,
         result.status, result.tagline, result.type, result.voteAverage, result.voteCount)
 }
 

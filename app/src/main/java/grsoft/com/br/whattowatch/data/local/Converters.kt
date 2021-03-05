@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import grsoft.com.br.whattowatch.data.entities.Genre
 import grsoft.com.br.whattowatch.data.entities.Network
+import grsoft.com.br.whattowatch.data.entities.ProductionCompany
 import grsoft.com.br.whattowatch.data.entities.VideoList
 import java.lang.reflect.Type
 import java.util.*
@@ -66,6 +67,17 @@ class Converters {
     fun fromStringToVideoList(videos: String): List<VideoList> {
         val networkType = object : TypeToken<List<VideoList>>() {}.type
         return Gson().fromJson(videos, networkType)
+    }
+
+    @TypeConverter
+    fun fromCompaniesListToString(companies: List<ProductionCompany>): String {
+        return Gson().toJson(companies)
+    }
+
+    @TypeConverter
+    fun fromStringToCompaniesList(companies: String): List<ProductionCompany> {
+        val networkType = object : TypeToken<List<ProductionCompany>>() {}.type
+        return Gson().fromJson(companies, networkType)
     }
 
 //    @TypeConverter

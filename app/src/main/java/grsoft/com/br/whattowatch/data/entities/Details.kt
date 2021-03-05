@@ -12,28 +12,28 @@ import kotlinx.parcelize.RawValue
 data class Details(
         @PrimaryKey
         val id: Int,
-        val backdropPath: String,
+        val backdropPath: String? = "",
         val createdById: Int?,
         val episodeRunTime: List<Int>,
-        val firstAirDate: String,
+        val firstAirDate: String?,
         val genres: @RawValue List<Genre>,
-        val homepage: String,
+        val homepage: String?,
         val inProduction: Boolean,
         val languages: List<String>,
-        val lastAirDate: String,
+        val lastAirDate: String?,
         val lastEpisodeToAirId: Int,
-        val name: String,
+        val name: String?,
         val nextEpisodeToAirId: Int?,
         val networks: @RawValue List<Network>,
         val numberOfEpisodes: Int,
         val numberOfSeasons: Int,
         val originCountry: List<String>,
-        val originalLanguage: String,
-        val originalName: String,
-        val overview: String,
+        val originalLanguage: String?,
+        val originalName: String?,
+        val overview: String?,
         val popularity: Double,
-        val posterPath: String,
-        val productionCompaniesId: List<Int>,
+        val posterPath: String?,
+        val companies: @RawValue List<ProductionCompany>,
         val productionCountries: List<String>,
         val seasonsId: List<Int>,
         val spokenLanguages: List<String>,
@@ -93,14 +93,13 @@ data class Details(
 //        constructor() : this(0, "", "", "")
 //}
 //
-//data class ProductionCompany(
-//        val prodCompanyId: Int = 0,
-//        val prodCompanyLogoPath: String = "",
-//        val prodCompanyName: String = "",
-//        val prodCompanyOriginCountry: String = ""
-//) {
-//        constructor() : this(0, "", "", "")
-//}
+data class ProductionCompany(
+        val prodCompanyId: Int = 0,
+        val prodCompanyLogoPath: String? = "",
+        val prodCompanyName: String = "",
+        val prodCompanyOriginCountry: String = ""
+)
+
 //
 //data class ProductionCountry(
 //        val isoProdCountry: String = "",
