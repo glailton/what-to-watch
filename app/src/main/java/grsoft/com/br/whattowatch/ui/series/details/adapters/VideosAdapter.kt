@@ -3,9 +3,9 @@ package grsoft.com.br.whattowatch.ui.series.details.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import grsoft.com.br.whattowatch.data.entities.VideoList
 import grsoft.com.br.whattowatch.databinding.VideosItemBinding
+import grsoft.com.br.whattowatch.ui.extensions.loadImage
 import grsoft.com.br.whattowatch.utils.YOUTUBE_THUMBNAIL
 
 class VideosAdapter : RecyclerView.Adapter<VideosAdapter.ViewHolder>() {
@@ -48,9 +48,7 @@ class VideosAdapter : RecyclerView.Adapter<VideosAdapter.ViewHolder>() {
 
         fun bind(videos: VideoList, position: Int) {
             videos.let {
-                Picasso.get()
-                        .load(String.format(YOUTUBE_THUMBNAIL, it.key))
-                        .into(binding.videoThumbnail)
+                binding.videoThumbnail.loadImage(String.format(YOUTUBE_THUMBNAIL, it.key))
                 binding.videoName.text = it.name
             }
 

@@ -1,6 +1,7 @@
 package grsoft.com.br.whattowatch.utils
 
 import grsoft.com.br.whattowatch.data.entities.*
+import grsoft.com.br.whattowatch.data.response.cast.CastResponse
 import grsoft.com.br.whattowatch.data.response.details.TVShowDetailsResponse
 import grsoft.com.br.whattowatch.data.response.network.NetworkResponse
 import grsoft.com.br.whattowatch.data.response.series.Result
@@ -67,7 +68,7 @@ fun mapperResultToDetails(result: TVShowDetailsResponse): Details {
     return Details(
         result.id, result.backdropPath, result.createdBy.getOrNull(0)?.id, result.episodeRunTime, result.firstAirDate,
         genres, result.homepage, result.inProduction, result.languages, result.lastAirDate,
-        result.lastEpisodeToAir.id, result.name, result.nextEpisodeToAir?.let { it.id },
+        result.lastEpisodeToAir.id, result.name, result.nextEpisodeToAir?.id,
         networks, result.numberOfEpisodes, result.numberOfSeasons, result.originCountry,
         result.originalLanguage, result.originalName, result.overview, result.popularity,
         result.posterPath, companies, productionCountries, seasons, spokenLanguages,
@@ -86,4 +87,31 @@ fun mapperResultToVideos(result: VideosResponse): Videos {
     }
 
     return Videos(result.id, videoList)
+}
+
+fun mapperResultToStaff(result: CastResponse): Staff {
+    val casts = mutableListOf<CastList>()
+    val crews = mutableListOf<CrewList>()
+
+    result.cast.forEach {
+        casts.add(CastList(it.id, it.adult, it.character, it.creditId, getGenderType(it.gender),
+                it.knownForDepartment, it.name, it.order, it.originalName,
+                it.popularity, it.profilePath))
+    }
+
+    result.crew.forEach {
+        crews.add(CrewList(it.id, it.adult, it.creditId, it.department, getGenderType(it.gender),
+                it.job, it.knownForDepartment, it.name, it.originalName, it.popularity, it.profilePath))
+    }
+
+    return Staff(result.id, casts, crews)
+}
+
+fun getGenderType(value: Int): GenderType {
+    return when(value){
+        0 -> GenderType.UNKNOWN
+        1 -> GenderType.FEMALE
+        2 -> GenderType.MALE
+        else -> GenderType.UNKNOWN
+    }
 }

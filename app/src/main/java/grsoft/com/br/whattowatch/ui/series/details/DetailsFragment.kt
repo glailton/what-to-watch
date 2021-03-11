@@ -19,6 +19,7 @@ import grsoft.com.br.whattowatch.databinding.DetailsFragmentBinding
 import grsoft.com.br.whattowatch.ui.extensions.loadImage
 import grsoft.com.br.whattowatch.ui.series.details.about.AboutFragment
 import grsoft.com.br.whattowatch.ui.series.details.adapters.ViewPageAdapter
+import grsoft.com.br.whattowatch.ui.series.details.cast.CastFragment
 import grsoft.com.br.whattowatch.ui.series.details.episodes.EpisodesFragment
 import grsoft.com.br.whattowatch.utils.BASE_URL
 import grsoft.com.br.whattowatch.utils.Resource
@@ -64,7 +65,6 @@ class DetailsFragment : Fragment() {
         }
     }
 
-
     private fun setupObservers() {
         detailsViewModel.details.observe(viewLifecycleOwner) { resource ->
             when (resource.status) {
@@ -96,6 +96,7 @@ class DetailsFragment : Fragment() {
     private fun setupViewPager(details: Details) {
         var viewPageAdapter = ViewPageAdapter(childFragmentManager)
         viewPageAdapter.addFragment(AboutFragment.newInstance(details), "About")
+        viewPageAdapter.addFragment(CastFragment.newInstance(details), "Cast")
         viewPageAdapter.addFragment(EpisodesFragment.newInstance(), "Episodes")
         binding.viewpager.adapter = viewPageAdapter
         binding.tabs.setupWithViewPager(binding.viewpager)

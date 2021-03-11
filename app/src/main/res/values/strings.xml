@@ -52,4 +52,7 @@
     <string name="votes_text">%1$d votes</string>
     <string name="duration_text">%1$d min</string>
 
+    <!-- Cast Fragment -->
+    <string name="cast_size_text">%1$d persons</string>
+
 </resources>

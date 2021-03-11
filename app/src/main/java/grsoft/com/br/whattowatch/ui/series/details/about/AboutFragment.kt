@@ -63,7 +63,6 @@ class AboutFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-//        adapter = FeedAdapter(this)
         adapter = VideosAdapter().apply {
             onItemClick = {
                 var video = adapter.getItem(it)
@@ -133,7 +132,9 @@ class AboutFragment : Fragment() {
             val chip = Chip(context)
             with(binding) {
                 chip.text = network.name
-                networkChipGroup.addView(chip)
+                if (networkChipGroup.size < details.networks.size) {
+                    networkChipGroup.addView(chip)
+                }
             }
         }
 

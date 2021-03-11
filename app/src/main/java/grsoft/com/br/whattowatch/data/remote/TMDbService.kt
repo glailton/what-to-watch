@@ -1,6 +1,7 @@
 package grsoft.com.br.whattowatch.data.remote
 
 import grsoft.com.br.whattowatch.BuildConfig
+import grsoft.com.br.whattowatch.data.response.cast.CastResponse
 import grsoft.com.br.whattowatch.data.response.details.TVShowDetailsResponse
 import grsoft.com.br.whattowatch.data.response.genre.GenreResponse
 import grsoft.com.br.whattowatch.data.response.network.NetworkResponse
@@ -56,5 +57,12 @@ interface TMDbService {
             @Query("language") language: String,
             @Query("api_key") apiKey: String = BuildConfig.API_KEY
     ): Response<VideosResponse>
+
+    @GET("tv/{tv_id}/credits")
+    suspend fun getStaff(
+        @Path("tv_id") id: Int,
+        @Query("language") language: String,
+        @Query("api_key") apiKey: String = BuildConfig.API_KEY
+    ): Response<CastResponse>
 
 }

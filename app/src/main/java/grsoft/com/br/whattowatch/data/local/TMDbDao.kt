@@ -63,8 +63,12 @@ interface TMDbDao {
     fun getVideo(id: Int): LiveData<Videos>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllVideos(videos: List<Videos>)
+    suspend fun insertVideo(videos: Videos)
+
+    //Cast
+    @Query("SELECT * FROM staff WHERE id = :id")
+    fun getStaff(id: Int): LiveData<Staff>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertVideo(videos: Videos)
+    suspend fun insertStaff(staff: Staff)
 }

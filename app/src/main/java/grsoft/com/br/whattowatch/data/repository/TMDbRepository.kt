@@ -51,6 +51,12 @@ class TMDbRepository @Inject constructor(
             saveCallResult = { localDataSource.insertVideo(mapperResultToVideos(it))}
     )
 
+    fun getStaff(id: Int, language: String) = performGetOperation(
+        databaseQuery = { localDataSource.getStaff(id) },
+        networkCall = { remoteDataSource.getStaff(id, language) },
+        saveCallResult = { localDataSource.insertStaff(mapperResultToStaff(it))}
+    )
+
     fun observePagedTvShow(connectivityAvailable: Boolean,
                            coroutineScope: CoroutineScope,
                            fragment: Fragment) =

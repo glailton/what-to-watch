@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:paddingBottom="@dimen/episode_card_collapsed_height">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/cast_size"
+            style="@style/TextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/content_margin_full"
+            android:layout_marginEnd="@dimen/content_margin_full"
+            android:layout_marginTop="@dimen/content_margin_full"
+            android:layout_marginBottom="@dimen/content_margin_full"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="10 pessoas" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_cast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/content_margin_full"
+            android:layout_marginEnd="@dimen/content_margin_full"
+            android:clipToPadding="false"
+            android:divider="@null"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cast_size"
+            tools:listitem="@layout/cast_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>

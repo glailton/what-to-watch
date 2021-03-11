@@ -3,12 +3,7 @@ package grsoft.com.br.whattowatch.data.local
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import grsoft.com.br.whattowatch.data.entities.Genre
-import grsoft.com.br.whattowatch.data.entities.Network
-import grsoft.com.br.whattowatch.data.entities.ProductionCompany
-import grsoft.com.br.whattowatch.data.entities.VideoList
-import java.lang.reflect.Type
-import java.util.*
+import grsoft.com.br.whattowatch.data.entities.*
 
 
 class Converters {
@@ -79,6 +74,34 @@ class Converters {
         val networkType = object : TypeToken<List<ProductionCompany>>() {}.type
         return Gson().fromJson(companies, networkType)
     }
+
+    @TypeConverter
+    fun fromCastListToString(cast: List<CastList>): String {
+        return Gson().toJson(cast)
+    }
+
+    @TypeConverter
+    fun fromStringToCastList(cast: String): List<CastList> {
+        val networkType = object : TypeToken<List<CastList>>() {}.type
+        return Gson().fromJson(cast, networkType)
+    }
+
+    @TypeConverter
+    fun fromCrewListToString(crew: List<CrewList>): String {
+        return Gson().toJson(crew)
+    }
+
+    @TypeConverter
+    fun fromStringToCrewList(crew: String): List<CrewList> {
+        val networkType = object : TypeToken<List<CrewList>>() {}.type
+        return Gson().fromJson(crew, networkType)
+    }
+
+    @TypeConverter
+    fun toGenderType(value: Int) = enumValues<GenderType>()[value]
+
+    @TypeConverter
+    fun fromGenderType(value: GenderType) = value.ordinal
 
 //    @TypeConverter
 //    fun stringToNetworkList(data: String?): List<Network?>? {

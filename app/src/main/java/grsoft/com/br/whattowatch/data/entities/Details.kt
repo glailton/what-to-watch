@@ -21,7 +21,7 @@ data class Details(
         val inProduction: Boolean,
         val languages: List<String>,
         val lastAirDate: String?,
-        val lastEpisodeToAirId: Int,
+        val lastEpisodeToAirId: Int?,
         val name: String?,
         val nextEpisodeToAirId: Int?,
         val networks: @RawValue List<Network>,

@@ -9,7 +9,7 @@ data class LastEpisodeToAir(
     @SerializedName("episode_number")
     val episodeNumber: Int,
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
     @SerializedName("name")
     val name: String,
     @SerializedName("overview")

@@ -37,8 +37,20 @@ fun TextView.setTextList(list: List<ProductionCompany>) {
 }
 
 fun ImageView.loadImage(imageUrl: String) {
-    Glide.with(this)
-            .load(imageUrl)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(this)
+    imageUrl.let {
+        Glide.with(this)
+                .load(it)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(this)
+    }
+}
+
+fun ImageView.loadCircleImage(imageUrl: String) {
+    imageUrl.let {
+        Glide.with(this)
+                .load(it)
+                .circleCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(this)
+    }
 }

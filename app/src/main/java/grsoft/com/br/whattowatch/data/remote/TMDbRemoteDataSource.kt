@@ -13,4 +13,5 @@ class TMDbRemoteDataSource @Inject constructor(
     suspend fun getDetails(id: Int, language: String) = getResult { tmdbService.getDetails(id, language) }
     suspend fun getNetwork(id: Int) = getResult { tmdbService.getNetwork(id) }
     suspend fun getVideos(id: Int, language: String) = getResult { tmdbService.getVideos(id, language) }
+    suspend fun getStaff(id: Int, language: String) = getResult { tmdbService.getStaff(id, language) }
 }
