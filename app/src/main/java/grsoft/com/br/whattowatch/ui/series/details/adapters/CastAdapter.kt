@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import grsoft.com.br.whattowatch.data.entities.CastList
 import grsoft.com.br.whattowatch.databinding.CastItemBinding
 import grsoft.com.br.whattowatch.ui.extensions.loadCircleImage
+import grsoft.com.br.whattowatch.ui.extensions.loadImage
 import grsoft.com.br.whattowatch.utils.BASE_URL
 
 class CastAdapter : RecyclerView.Adapter<CastAdapter.ViewHolder>() {

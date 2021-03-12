@@ -96,7 +96,7 @@ class DetailsFragment : Fragment() {
     private fun setupViewPager(details: Details) {
         var viewPageAdapter = ViewPageAdapter(childFragmentManager)
         viewPageAdapter.addFragment(AboutFragment.newInstance(details), "About")
-        viewPageAdapter.addFragment(CastFragment.newInstance(details), "Cast")
+//        viewPageAdapter.addFragment(CastFragment.newInstance(details), "Cast")
         viewPageAdapter.addFragment(EpisodesFragment.newInstance(), "Episodes")
         binding.viewpager.adapter = viewPageAdapter
         binding.tabs.setupWithViewPager(binding.viewpager)

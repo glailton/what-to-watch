@@ -24,6 +24,8 @@ import android.text.TextUtils
 import android.widget.TextView
 import grsoft.com.br.whattowatch.ui.extensions.hide
 import grsoft.com.br.whattowatch.ui.extensions.setTextList
+import grsoft.com.br.whattowatch.ui.series.details.adapters.CastAdapter
+import grsoft.com.br.whattowatch.ui.series.details.cast.CastViewModel
 import grsoft.com.br.whattowatch.utils.YOUTUBE_URL
 
 
@@ -34,6 +36,7 @@ class AboutFragment : Fragment() {
     private val binding get() = _binding!!
     private val aboutViewModel: AboutViewModel by viewModels()
     private lateinit var adapter: VideosAdapter
+    private lateinit var castAdapter: CastAdapter
 
     companion object {
         fun newInstance(details: Details) = AboutFragment().apply {
@@ -58,6 +61,7 @@ class AboutFragment : Fragment() {
             aboutViewModel.start(it.id)
             setupObservers()
             setupRecyclerView()
+            setupCastRecyclerView()
             bindView(it)
         }
     }
@@ -79,7 +83,19 @@ class AboutFragment : Fragment() {
                 LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewVideos.layoutManager = layoutManager
         binding.recyclerViewVideos.adapter = adapter
+    }
 
+    private fun setupCastRecyclerView() {
+        castAdapter = CastAdapter().apply {
+            onItemClick = {
+                var cast = castAdapter.getItem(it)
+            }
+        }
+        binding.recyclerViewCast.itemAnimator = DefaultItemAnimator()
+        val layoutManager = LinearLayoutManager(context,
+                LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewCast.layoutManager = layoutManager
+        binding.recyclerViewCast.adapter = castAdapter
     }
 
     private fun setupObservers() {
@@ -91,6 +107,25 @@ class AboutFragment : Fragment() {
                             adapter.setItems(resource.data.results)
                         else
                             binding.labelTrailer.hide()
+                    }
+                }
+
+                Resource.Status.ERROR ->
+                    Toast.makeText(activity, resource.message, Toast.LENGTH_SHORT).show()
+
+                Resource.Status.LOADING -> {
+                }
+            }
+        }
+
+        aboutViewModel.staff.observe(viewLifecycleOwner) { resource ->
+            when (resource.status) {
+                Resource.Status.SUCCESS -> {
+                    resource.data?.let {
+                        if (resource.data.cast.isNotEmpty()) {
+//                            binding.castSize.text = getString(R.string.cast_size_text, resource.data.cast.size)
+                            castAdapter.setItems(resource.data.cast)
+                        }
                     }
                 }
 

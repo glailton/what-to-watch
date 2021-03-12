@@ -31,6 +31,7 @@
     <string name="network_label">Network</string>
     <string name="overview_label">Overview</string>
     <string name="trailer_label">Trailers</string>
+    <string name="cast_label">Cast</string>
     <string name="genre_label">Genre</string>
     <string name="info_label">TV Show info</string>
     <string name="original_title_label">Original Title</string>

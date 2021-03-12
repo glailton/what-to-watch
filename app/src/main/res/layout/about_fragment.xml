@@ -379,14 +379,13 @@
             app:layout_constraintStart_toEndOf="@+id/barrier"
             app:layout_constraintTop_toTopOf="@+id/companies_label" />
 
-
         <TextView
             android:id="@+id/label_trailer"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/content_margin_full"
-            android:layout_marginTop="@dimen/content_margin_full_double"
+            android:layout_marginTop="@dimen/content_margin_full"
             android:text="@string/trailer_label"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             app:layout_constraintStart_toStartOf="parent"
@@ -397,7 +396,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/content_margin_full"
-            android:layout_marginTop="@dimen/content_margin_full_double"
+            android:layout_marginTop="@dimen/content_margin_full"
             android:layout_marginEnd="@dimen/content_margin_full"
             android:clipToPadding="false"
             android:divider="@null"
@@ -408,6 +407,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_trailer"
             tools:listitem="@layout/videos_item" />
+
+        <TextView
+            android:id="@+id/label_cast"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/content_margin_full"
+            android:layout_marginTop="@dimen/content_margin_full"
+            android:text="@string/cast_label"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_videos" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_cast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/content_margin_full"
+            android:layout_marginEnd="@dimen/content_margin_full"
+            android:clipToPadding="false"
+            android:divider="@null"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_cast"
+            tools:listitem="@layout/cast_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -2,44 +2,46 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="160dp"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:layout_marginEnd="@dimen/content_margin_full">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/castImage"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:id="@+id/cast_image"
+        android:layout_width="140dp"
+        android:layout_height="160dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_baseline_image_24"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/castName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        tools:text="Name"
+        android:id="@+id/cast_name"
         style="@style/Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_margin_half"
+        android:gravity="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-        android:textSize="16sp"
+        android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/castImage"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cast_image"
+        tools:text="Name" />
 
     <TextView
         android:id="@+id/cast_character"
+        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
-        style="@style/Text"
+        android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-        tools:text="character"
-        app:layout_constraintStart_toEndOf="@+id/castImage"
-        app:layout_constraintTop_toBottomOf="@+id/castName" />
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cast_name"
+        tools:text="character" />
 </androidx.constraintlayout.widget.ConstraintLayout>

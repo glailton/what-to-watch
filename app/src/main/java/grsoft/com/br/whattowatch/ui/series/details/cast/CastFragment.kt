@@ -60,7 +60,6 @@ class CastFragment : Fragment() {
             LinearLayoutManager.VERTICAL, false)
         binding.recyclerViewCast.layoutManager = layoutManager
         binding.recyclerViewCast.adapter = adapter
-
     }
 
     private fun setupObservers() {
