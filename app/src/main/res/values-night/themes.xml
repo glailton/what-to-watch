@@ -25,7 +25,7 @@
     </style>
 
     <style name="TextView">
-        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
 

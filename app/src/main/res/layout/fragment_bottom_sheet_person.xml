@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+
+
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progress_bar"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:indeterminate="true"-->
+<!--        tools:visibility="invisible" />-->
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_gravity="top"
+            android:orientation="horizontal"
+            android:id="@+id/show_overview_content"
+            android:layout_width="match_parent"
+            android:fitsSystemWindows="true"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_view"
+                android:layout_width="@dimen/show_overview_poster_width"
+                android:layout_height="@dimen/show_overview_poster_height"
+                android:layout_marginBottom="@dimen/content_margin_half"
+                android:layout_marginStart="@dimen/content_margin_full"
+                android:layout_marginEnd="@dimen/content_margin_full"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/Widget.CardView.Poster">
+
+                <ImageView
+                    android:id="@+id/image_person"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_baseline_image_24"
+                    tools:src="@tools:sample/backgrounds/scenic"
+                    android:transitionName="@string/transition_show_poster"/>
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

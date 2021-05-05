@@ -44,6 +44,7 @@
     <string name="certification_label">Certification</string>
     <string name="companies_label">Companies</string>
     <string name="transition_show_poster">show_poster</string>
+    <string name="read_more">… See more</string>
 
     <!-- Details Fragment -->
     <string name="year_airs_label">%1$s \u2022 %2$s</string>
@@ -54,5 +55,7 @@
 
     <!-- Cast Fragment -->
     <string name="cast_size_text">%1$d persons</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import grsoft.com.br.whattowatch.data.models.FeedItem
-import grsoft.com.br.whattowatch.databinding.FeedItemBinding
+import grsoft.com.br.whattowatch.databinding.ItemFeedBinding
 import grsoft.com.br.whattowatch.ui.series.adapters.SeriesAdapter
 
 class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
@@ -24,7 +24,7 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
             inflater = LayoutInflater.from(parent.context)
         }
 
-        val binding = FeedItemBinding.inflate(inflater!!, parent, false)
+        val binding = ItemFeedBinding.inflate(inflater!!, parent, false)
         return ViewHolder(binding)
     }
 
@@ -36,7 +36,7 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
     override fun getItemCount() = feedItems.size
 
-    inner class ViewHolder(val binding: FeedItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: ItemFeedBinding): RecyclerView.ViewHolder(binding.root) {
 
         private val seriesAdapter by lazy {
             val adapter = SeriesAdapter().apply {

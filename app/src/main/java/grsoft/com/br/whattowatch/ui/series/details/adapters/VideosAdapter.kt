@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import grsoft.com.br.whattowatch.data.entities.VideoList
-import grsoft.com.br.whattowatch.databinding.VideosItemBinding
+import grsoft.com.br.whattowatch.databinding.ItemVideosBinding
 import grsoft.com.br.whattowatch.ui.extensions.loadImage
 import grsoft.com.br.whattowatch.utils.YOUTUBE_THUMBNAIL
 
@@ -26,7 +26,7 @@ class VideosAdapter : RecyclerView.Adapter<VideosAdapter.ViewHolder>() {
             inflater = LayoutInflater.from(parent.context)
         }
 
-        val binding = VideosItemBinding.inflate(inflater!!, parent, false)
+        val binding = ItemVideosBinding.inflate(inflater!!, parent, false)
         return ViewHolder(binding)
     }
 
@@ -44,7 +44,7 @@ class VideosAdapter : RecyclerView.Adapter<VideosAdapter.ViewHolder>() {
         } else videos[position]
     }
 
-    inner class ViewHolder(val binding: VideosItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: ItemVideosBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(videos: VideoList, position: Int) {
             videos.let {

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:fitsSystemWindows="true">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        tools:visibility="gone" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/show_overview_collapsing_toolbar_height"
+            android:fitsSystemWindows="true"
+            app:expandedTitleMarginBottom="@dimen/show_overview_title_margin_bottom"
+            app:collapsedTitleTextAppearance="@style/TextAppearance.ShowOverview.Title.Collapsed"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="64dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <View
+                android:id="@+id/view"
+                android:background="@drawable/fanart_overlay"
+                android:fitsSystemWindows="true"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/show_overview_backdrop_height"
+                android:alpha="0" app:layout_collapseMode="parallax"/>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tab_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="@dimen/content_margin_full"
+                tools:title="tv title"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_gravity="bottom"
+                android:orientation="horizontal"
+                android:id="@+id/show_overview_content"
+                android:layout_width="match_parent"
+                android:fitsSystemWindows="true"
+                android:layout_height="@dimen/show_overview_height"
+                app:layout_collapseMode="parallax">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_view"
+                    android:layout_width="@dimen/show_overview_poster_width"
+                    android:layout_height="@dimen/show_overview_poster_height"
+                    android:layout_marginBottom="@dimen/content_margin_half"
+                    android:layout_marginStart="@dimen/content_margin_full"
+                    android:layout_marginEnd="@dimen/content_margin_full"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardElevation="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/Widget.CardView.Poster">
+
+                    <ImageView
+                        android:id="@+id/image_person"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_baseline_image_24"
+                        tools:src="@tools:sample/backgrounds/scenic"
+                        android:transitionName="@string/transition_show_poster"/>
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

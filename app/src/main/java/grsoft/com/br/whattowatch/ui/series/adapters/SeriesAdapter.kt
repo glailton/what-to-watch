@@ -5,9 +5,8 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import grsoft.com.br.whattowatch.data.entities.TVShow
-import grsoft.com.br.whattowatch.databinding.SeriesItemBinding
+import grsoft.com.br.whattowatch.databinding.ItemSeriesBinding
 import grsoft.com.br.whattowatch.ui.extensions.loadImage
 import grsoft.com.br.whattowatch.utils.BASE_URL
 
@@ -26,7 +25,7 @@ class SeriesAdapter: PagedListAdapter<TVShow, SeriesAdapter.ViewHolder>(diffCall
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = SeriesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemSeriesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -47,16 +46,18 @@ class SeriesAdapter: PagedListAdapter<TVShow, SeriesAdapter.ViewHolder>(diffCall
     }
 
     inner class ViewHolder(
-        private val binding: SeriesItemBinding): RecyclerView.ViewHolder(binding.root) {
+        private val binding: ItemSeriesBinding): RecyclerView.ViewHolder(binding.root) {
 
         private lateinit var tvShow: TVShow
         private val imageViewPoster = binding.imagePoster
         private var title = binding.tvTitle
+        private var voteAverage = binding.tvVoteAverage
 
         fun bindView(tvShow: TVShow) {
             this.tvShow = tvShow
             imageViewPoster.loadImage(BASE_URL + tvShow.posterPath)
             title.text = tvShow.name
+            voteAverage.text = tvShow.voteAverage.toString()
 
             binding.root.setOnClickListener {
                 onItemClick?.invoke(tvShow)

@@ -111,8 +111,11 @@ dependencies {
     //Paging library
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
-    //CircleImageView
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //ReadMoreTextView
+    implementation 'kr.co.prnd:readmore-textview:1.0.0'
+
+    //BottomDrawer
+    implementation 'com.github.HeyAlex:BottomDrawer:v1.0.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'

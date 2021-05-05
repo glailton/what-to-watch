@@ -28,4 +28,8 @@
     <dimen name="trailer_horizontal_height_small">45dp</dimen>
     <dimen name="icon_medium_large">36dp</dimen>
     <dimen name="detail_about_item_margin">20dp</dimen>
+
+    <dimen name="bottom_sheet_handle_width">36dp</dimen>
+    <dimen name="bottom_sheet_handle_height">12dp</dimen>
+    <dimen name="bottom_sheet_handle_top_margin">8dp</dimen>
 </resources>

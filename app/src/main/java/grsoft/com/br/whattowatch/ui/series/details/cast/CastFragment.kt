@@ -14,6 +14,7 @@ import grsoft.com.br.whattowatch.R
 import grsoft.com.br.whattowatch.data.entities.Details
 import grsoft.com.br.whattowatch.databinding.CastFragmentBinding
 import grsoft.com.br.whattowatch.ui.series.details.adapters.CastAdapter
+import grsoft.com.br.whattowatch.ui.series.details.person.BottomSheetPersonFragment
 import grsoft.com.br.whattowatch.utils.Resource
 
 @AndroidEntryPoint
@@ -52,6 +53,10 @@ class CastFragment : Fragment() {
         adapter = CastAdapter().apply {
             onItemClick = {
                 var cast = adapter.getItem(it)
+                //TODO see if is possible to change to use a navigation component
+
+                parentFragmentManager.beginTransaction().add(BottomSheetPersonFragment(), "test")
+                    ?.commit()
 
             }
         }

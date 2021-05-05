@@ -14,6 +14,12 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Pull" parent="BottomDialogTheme">
+        <item name="bottom_sheet_extra_padding">0dp</item>
+        <item name="bottom_sheet_corner_radius">26dp</item>
+        <item name="should_draw_content_under_handle_view">true</item>
+    </style>
+
     <style name="Toolbar" parent="Theme.WhatToWatch">
         <item name="android:background">@color/primary_color</item>
     </style>
